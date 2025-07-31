@@ -876,6 +876,7 @@
       const sameSiteFlag = sameSite ? `; SameSite=${sameSite}` : '';
 
       document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=${path}${secureFlag}${sameSiteFlag}`;
+
     },
 
     get: function(name) {
@@ -1263,7 +1264,7 @@
 
       clearFormErrors('signupModal');
 
-      const name = "Null";
+      const name = "Let's go"
       const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPassword').value;
       const confirmPassword = document.getElementById('signupConfirmPassword').value;
