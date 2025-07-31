@@ -334,357 +334,95 @@
       line-height: 1.6;
     }
 
-    /* 响应式设计 - 超大屏幕 */
-    @media (min-width: 1920px) {
-      .hero h1 {
-        font-size: 6rem;
-      }
-
-      .hero p {
-        font-size: 1.6rem;
-      }
-
-      .cta-button {
-        padding: 25px 60px;
-        font-size: 1.4rem;
-      }
-
-      .logo {
-        font-size: 3rem;
-      }
-
-      .btn {
-        padding: 15px 35px;
-        font-size: 1.1rem;
-      }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
     }
 
-    /* 大屏幕桌面 */
-    @media (min-width: 1440px) and (max-width: 1919px) {
-      .hero h1 {
-        font-size: 5rem;
-      }
-
-      .hero p {
-        font-size: 1.4rem;
-      }
-
-      .cta-button {
-        padding: 22px 55px;
-        font-size: 1.3rem;
-      }
+    .scroll-indicator::before {
+      content: '↓';
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    /* 标准桌面 */
-    @media (min-width: 1024px) and (max-width: 1439px) {
-      .hero h1 {
-        font-size: 4rem;
-      }
-
-      .hero p {
-        font-size: 1.2rem;
-      }
-
-      nav {
-        padding: 20px 40px;
-      }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
     }
 
-    /* 平板横屏 */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .hero h1 {
-        font-size: 3.5rem;
-        line-height: 1.1;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-        margin-bottom: 35px;
-      }
-
-      .cta-button {
-        padding: 18px 45px;
-        font-size: 1.1rem;
-      }
-
-      nav {
-        padding: 15px 30px;
-      }
-
-      .logo {
-        font-size: 2.2rem;
-      }
-
-      .btn {
-        padding: 12px 25px;
-        font-size: 0.95rem;
-      }
-
-      .features {
-        padding: 80px 30px;
-      }
-
-      .features-container {
-        gap: 30px;
-      }
-
-      .feature-card {
-        padding: 35px;
-      }
+    /* Cookie consent banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 0, 110, 0.3);
+      padding: 20px;
+      z-index: 1500;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
     }
 
-    /* 平板竖屏和大手机 */
-    @media (min-width: 481px) and (max-width: 767px) {
-      .hero h1 {
-        font-size: 2.8rem;
-        line-height: 1.1;
-        margin-bottom: 15px;
-      }
-
-      .hero p {
-        font-size: 1rem;
-        margin-bottom: 30px;
-        padding: 0 10px;
-      }
-
-      .cta-button {
-        padding: 16px 40px;
-        font-size: 1rem;
-      }
-
-      nav {
-        padding: 12px 20px;
-      }
-
-      .logo {
-        font-size: 1.8rem;
-      }
-
-      .auth-buttons {
-        gap: 8px;
-      }
-
-      .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-
-      .features {
-        padding: 60px 20px;
-      }
-
-      .features-container {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .feature-card {
-        padding: 30px 25px;
-      }
-
-      .feature-icon {
-        font-size: 2.5rem;
-      }
-
-      .feature-card h3 {
-        font-size: 1.3rem;
-      }
+    .cookie-banner.show {
+      transform: translateY(0);
     }
 
-    /* 小手机 */
-    @media (max-width: 480px) {
-      .hero {
-        padding: 0 15px;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-        line-height: 1.1;
-        margin-bottom: 12px;
-        letter-spacing: 1px;
-      }
-
-      .hero p {
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-        padding: 0 5px;
-        line-height: 1.4;
-      }
-
-      .cta-button {
-        padding: 14px 30px;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-      }
-
-      nav {
-        padding: 10px 15px;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-      }
-
-      .auth-buttons {
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-        border-radius: 25px;
-      }
-
-      .features {
-        padding: 50px 15px;
-      }
-
-      .features-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .feature-card {
-        padding: 25px 20px;
-        border-radius: 15px;
-      }
-
-      .feature-icon {
-        font-size: 2rem;
-        margin-bottom: 15px;
-      }
-
-      .feature-card h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-      }
-
-      .feature-card p {
-        font-size: 0.9rem;
-        line-height: 1.5;
-      }
-
-      .scroll-indicator {
-        bottom: 20px;
-      }
-
-      .scroll-indicator::before {
-        font-size: 1.5rem;
-      }
-
-      .user-info {
-        flex-direction: column;
-        gap: 8px;
-        align-items: flex-end;
-      }
-
-      .welcome-text {
-        font-size: 0.8rem;
-        text-align: right;
-      }
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    /* 超小屏幕（小于360px宽度） */
-    @media (max-width: 359px) {
-      .hero h1 {
-        font-size: 1.8rem;
-        letter-spacing: 0.5px;
-      }
-
-      .hero p {
-        font-size: 0.8rem;
-        margin-bottom: 20px;
-      }
-
-      .cta-button {
-        padding: 12px 25px;
-        font-size: 0.8rem;
-      }
-
-      .logo {
-        font-size: 1.3rem;
-      }
-
-      .btn {
-        padding: 7px 14px;
-        font-size: 0.75rem;
-      }
-
-      .feature-card {
-        padding: 20px 15px;
-      }
-
-      .feature-icon {
-        font-size: 1.8rem;
-      }
-
-      .feature-card h3 {
-        font-size: 1.1rem;
-      }
-
-      .feature-card p {
-        font-size: 0.85rem;
-      }
+    .cookie-text {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
-    /* 横屏模式优化 */
-    @media (max-height: 500px) and (orientation: landscape) {
-      .hero {
-        height: auto;
-        min-height: 100vh;
-        padding: 80px 20px 20px;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-      }
-
-      .hero p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-      }
-
-      .cta-button {
-        padding: 12px 30px;
-        font-size: 1rem;
-      }
-
-      .scroll-indicator {
-        display: none;
-      }
-
-      nav {
-        padding: 10px 30px;
-      }
+    .cookie-buttons {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    /* 高分辨率设备优化 */
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      .logo, .hero h1 {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    /* 触摸设备优化 */
-    @media (hover: none) and (pointer: coarse) {
-      .btn:hover, .feature-card:hover, .cta-button:hover {
-        transform: none;
-      }
+    .cookie-accept {
+      background: linear-gradient(45deg, #ff006e, #fb5607);
+      color: white;
+    }
 
-      .btn:active {
-        transform: scale(0.95);
-      }
+    .cookie-accept:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+    }
 
-      .cta-button:active {
-        transform: scale(0.95);
-      }
+    .cookie-decline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-      .feature-card:active {
-        transform: translateY(-5px);
-      }
+    .cookie-decline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
     }
 
     /* 登录/注册模态框样式 */
@@ -854,120 +592,46 @@
       display: none;
     }
 
-    /* 响应式模态框 */
-    @media (max-width: 480px) {
-      .modal-content {
-        padding: 30px 25px;
-        margin: 20px;
-      }
-
-      .modal h2 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-      }
-
-      .form-input {
-        padding: 12px;
-        font-size: 16px; /* 防止iOS缩放 */
-      }
-
-      .form-submit {
-        padding: 12px;
-        font-size: 14px;
-      }
-    }
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s infinite;
-    }
-
-    .scroll-indicator::before {
-      content: '↓';
-      font-size: 2rem;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
-    }
-
-    /* Cookie consent banner */
-    .cookie-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 0, 110, 0.3);
-      padding: 20px;
-      z-index: 1500;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .cookie-banner.show {
-      transform: translateY(0);
-    }
-
-    .cookie-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .cookie-text {
-      color: rgba(255, 255, 255, 0.9);
+    .show-forgot-password {
+      color: #ff006e;
+      text-decoration: none;
       font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .cookie-buttons {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .cookie-btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: color 0.3s ease;
     }
 
-    .cookie-accept {
-      background: linear-gradient(45deg, #ff006e, #fb5607);
-      color: white;
+    .show-forgot-password:hover {
+      color: #fb5607;
     }
 
-    .cookie-accept:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
-    }
-
-    .cookie-decline {
-      background: transparent;
-      color: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .cookie-decline:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-
+    /* 响应式设计 */
     @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        padding: 15px 35px;
+        font-size: 1rem;
+      }
+
+      .nav-container {
+        padding: 0 20px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
       .cookie-content {
         flex-direction: column;
         text-align: center;
@@ -985,6 +649,68 @@
       .cookie-btn {
         flex: 1;
         max-width: 120px;
+      }
+
+      .modal-content {
+        padding: 30px 25px;
+        margin: 20px;
+      }
+
+      .modal h2 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+      }
+
+      .form-input {
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      .form-submit {
+        padding: 12px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+        letter-spacing: 1px;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+      }
+
+      .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .auth-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+
+      .user-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-end;
+      }
+
+      .welcome-text {
+        font-size: 0.8rem;
+        text-align: right;
       }
     }
   </style>
@@ -1064,7 +790,7 @@
 
       <!-- Forgot Password Link -->
       <div style="text-align: right; margin-bottom: 1rem;">
-        <a onclick="showForgotPassword()" style="color: #ff006e; text-decoration: none; font-size: 0.9rem; cursor: pointer; transition: color 0.3s ease;">
+        <a onclick="showForgotPassword()" class="show-forgot-password">
           Forgot Password?
         </a>
       </div>
@@ -1085,7 +811,11 @@
     <span class="close" onclick="closeModal('signupModal')">&times;</span>
     <h2>Join Soul Hitter</h2>
     <form id="signupForm">
-
+      <div class="form-group">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+        <div class="form-error" id="signupNameError"></div>
+      </div>
       <div class="form-group">
         <label for="signupEmail">Email</label>
         <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
@@ -1138,7 +868,6 @@
 <script>
   // Cookie management utilities
   const CookieManager = {
-    // Set a cookie with optional expiration days, path, and security options
     set: function(name, value, days = 30, path = '/', secure = true, sameSite = 'Lax') {
       let expires = '';
       if (days) {
@@ -1153,7 +882,6 @@
       document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=${path}${secureFlag}${sameSiteFlag}`;
     },
 
-    // Get a cookie value by name
     get: function(name) {
       const nameEQ = name + '=';
       const ca = document.cookie.split(';');
@@ -1167,12 +895,10 @@
       return null;
     },
 
-    // Delete a cookie
     delete: function(name, path = '/') {
       document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}`;
     },
 
-    // Check if cookies are enabled
     isEnabled: function() {
       try {
         const testKey = 'cookieTest';
@@ -1185,9 +911,8 @@
       }
     },
 
-    // Set user authentication data
     setAuth: function(token, userInfo = null, rememberMe = false) {
-      const expireDays = rememberMe ? 30 : 7; // 30 days if remember me, otherwise 7 days
+      const expireDays = rememberMe ? 30 : 7;
 
       this.set('authToken', token, expireDays, '/', true, 'Lax');
 
@@ -1195,11 +920,9 @@
         this.set('userInfo', JSON.stringify(userInfo), expireDays, '/', true, 'Lax');
       }
 
-      // Set session flag
       this.set('isLoggedIn', 'true', expireDays, '/', true, 'Lax');
     },
 
-    // Get user authentication data
     getAuth: function() {
       const token = this.get('authToken');
       const userInfoStr = this.get('userInfo');
@@ -1221,19 +944,16 @@
       };
     },
 
-    // Clear all authentication data
     clearAuth: function() {
       this.delete('authToken');
       this.delete('userInfo');
       this.delete('isLoggedIn');
     },
 
-    // Set user preferences
     setPreferences: function(preferences) {
-      this.set('userPrefs', JSON.stringify(preferences), 365); // 1 year
+      this.set('userPrefs', JSON.stringify(preferences), 365);
     },
 
-    // Get user preferences
     getPreferences: function() {
       const prefsStr = this.get('userPrefs');
       if (prefsStr) {
@@ -1258,18 +978,17 @@
     if (!consent) {
       setTimeout(() => {
         banner.classList.add('show');
-      }, 2000); // Show after 2 seconds
+      }, 2000);
     }
   }
 
   function acceptCookies() {
-    CookieManager.set('cookieConsent', 'accepted', 365); // 1 year
+    CookieManager.set('cookieConsent', 'accepted', 365);
     hideCookieBanner();
   }
 
   function declineCookies() {
     CookieManager.set('cookieConsent', 'declined', 365);
-    // Clear any existing cookies except essential ones
     CookieManager.clearAuth();
     hideCookieBanner();
   }
@@ -1279,7 +998,6 @@
     banner.classList.remove('show');
   }
 
-  // Check if user can use cookies
   function canUseCookies() {
     const consent = CookieManager.get('cookieConsent');
     return consent === 'accepted' && CookieManager.isEnabled();
@@ -1305,20 +1023,23 @@
     }
   }
 
-  // Handle logout
   function handleLogout() {
     if (canUseCookies()) {
       CookieManager.clearAuth();
     }
     updateAuthUI();
-
-    // Show success message
     showToast('Logged out successfully', 'success');
+  }
+
+  function showForgotPassword() {
+    closeModal('loginModal');
+    const modal = document.getElementById('forgotPasswordModal');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
   }
 
   // Toast notification system
   function showToast(message, type = 'info', duration = 3000) {
-    // Remove existing toast
     const existingToast = document.querySelector('.toast');
     if (existingToast) {
       existingToast.remove();
@@ -1348,12 +1069,10 @@
 
     document.body.appendChild(toast);
 
-    // Animate in
     setTimeout(() => {
       toast.style.transform = 'translateX(0)';
     }, 100);
 
-    // Animate out
     setTimeout(() => {
       toast.style.transform = 'translateX(400px)';
       setTimeout(() => {
@@ -1369,7 +1088,6 @@
     const particlesContainer = document.getElementById('particles');
     const particleCount = getParticleCount();
 
-    // Clear existing particles
     particlesContainer.innerHTML = '';
 
     for (let i = 0; i < particleCount; i++) {
@@ -1382,21 +1100,18 @@
     }
   }
 
-  // Handle login
   async function handleLogin() {
     const modal = document.getElementById('loginModal');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
-  // Handle registration
   async function handleRegister() {
     const modal = document.getElementById('signupModal');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
-  // Close modal
   function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     modal.classList.remove('show');
@@ -1404,7 +1119,6 @@
     clearFormErrors(modalId);
   }
 
-  // Switch between login and signup
   function switchToSignup() {
     closeModal('loginModal');
     closeModal('forgotPasswordModal');
@@ -1417,7 +1131,6 @@
     setTimeout(() => handleLogin(), 100);
   }
 
-  // Clear form errors
   function clearFormErrors(modalId) {
     const modal = document.getElementById(modalId);
     const errors = modal.querySelectorAll('.form-error, .form-success');
@@ -1427,27 +1140,23 @@
     });
   }
 
-  // Show error message
   function showError(elementId, message) {
     const element = document.getElementById(elementId);
     element.textContent = message;
     element.style.display = 'block';
   }
 
-  // Show success message
   function showSuccess(elementId, message) {
     const element = document.getElementById(elementId);
     element.textContent = message;
     element.style.display = 'block';
   }
 
-  // Validate email format
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  // Validate password strength
   function validatePassword(password) {
     return password.length >= 6;
   }
@@ -1463,13 +1172,11 @@
         return;
       }
 
-      // Clear previous errors
       clearFormErrors('loginModal');
 
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
 
-      // Validation
       let hasErrors = false;
 
       if (!email) {
@@ -1488,13 +1195,11 @@
       if (hasErrors) return;
 
       try {
-        // Show loading state
         const submitBtn = loginForm.querySelector('.form-submit');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'LOGGING IN...';
         submitBtn.disabled = true;
 
-        // Send login request to backend
         const response = await fetch(`${API_BASE_URL}/auth/login`, {
           method: 'POST',
           headers: {
@@ -1508,7 +1213,6 @@
         if (response.ok) {
           showSuccess('loginFormSuccess', 'Login successful! Redirecting...');
 
-          // Store authentication data in cookies
           if (data.token) {
             const userInfo = {
               email: email,
@@ -1517,33 +1221,24 @@
               form_submitted: data.form_submitted
             };
 
-            CookieManager.setAuth(data.token, userInfo, true); // Remember for 30 days
+            CookieManager.setAuth(data.token, userInfo, true);
           }
 
-          // Update UI and redirect to profile setup
           setTimeout(() => {
             closeModal('loginModal');
             updateAuthUI();
-            showToast('Welcome back! Redirecting to profile setup...', 'success');
 
-            // Redirect to profile setup page after a short delay
+            const { form_submitted } = CookieManager.getAuth().userInfo || {};
+            const redirectUrl = form_submitted ? 'home.html' : 'profileSetUp.html';
+            const redirectMessage = form_submitted
+              ? 'Welcome back! Redirecting to home...'
+              : 'Welcome back! Redirecting to profile setup...';
+
+            showToast(redirectMessage, 'success');
+
             setTimeout(() => {
-              closeModal('loginModal');
-              updateAuthUI();
-
-              const { form_submitted } = CookieManager.getAuth().userInfo || {};
-              const redirectUrl = form_submitted ? 'home.html' : 'profileSetUp.html';
-              const redirectMessage = form_submitted
-                ? 'Welcome back! Redirecting to home...'
-                : 'Welcome back! Redirecting to profile setup...';
-
-              showToast(redirectMessage, 'success');
-
-              // Redirect after a short delay
-              setTimeout(() => {
-                window.location.href = redirectUrl;
-              }, 1000);
-            }, 1500);
+              window.location.href = redirectUrl;
+            }, 1000);
           }, 1500);
 
         } else {
@@ -1554,80 +1249,13 @@
         console.error('Login error:', error);
         showError('loginFormError', 'Network error. Please check your connection and try again.');
       } finally {
-        // Restore button state
         const submitBtn = loginForm.querySelector('.form-submit');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       }
     });
-  });
 
-  // Handle forgot password form submission
-  document.addEventListener('DOMContentLoaded', () => {
-    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-    forgotPasswordForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Clear previous errors
-      clearFormErrors('forgotPasswordModal');
-
-      const email = document.getElementById('forgotEmail').value.trim();
-
-      // Validation
-      if (!email) {
-        showError('forgotEmailError', 'Email is required');
-        return;
-      } else if (!validateEmail(email)) {
-        showError('forgotEmailError', 'Please enter a valid email');
-        return;
-      }
-
-      try {
-        // Show loading state
-        const submitBtn = document.getElementById('forgotPasswordBtn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'SENDING...';
-        submitBtn.disabled = true;
-
-        // Send forgot password request to backend
-        const response = await fetch(`${API_BASE_URL}/forgot-password`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          showSuccess('forgotPasswordFormSuccess', 'Password reset link sent! Check your email.');
-
-          // Clear form
-          forgotPasswordForm.reset();
-
-          // Auto close modal after success
-          setTimeout(() => {
-            closeModal('forgotPasswordModal');
-            showToast('Password reset email sent successfully!', 'success');
-          }, 3000);
-
-        } else {
-          showError('forgotPasswordFormError', data.message || 'Failed to send reset link. Please try again.');
-        }
-
-      } catch (error) {
-        console.error('Forgot password error:', error);
-        showError('forgotPasswordFormError', 'Network error. Please check your connection and try again.');
-      } finally {
-        // Restore button state
-        const submitBtn = document.getElementById('forgotPasswordBtn');
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-  });
-  document.addEventListener('DOMContentLoaded', () => {
+    // Handle signup form submission
     const signupForm = document.getElementById('signupForm');
     signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1637,15 +1265,13 @@
         return;
       }
 
-      // Clear previous errors
       clearFormErrors('signupModal');
 
-
+      const name = document.getElementById('signupName').value.trim();
       const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPassword').value;
       const confirmPassword = document.getElementById('signupConfirmPassword').value;
 
-      // Validation
       let hasErrors = false;
 
       if (!name) {
@@ -1683,13 +1309,11 @@
       if (hasErrors) return;
 
       try {
-        // Show loading state
         const submitBtn = signupForm.querySelector('.form-submit');
-        
+        const originalText = submitBtn.textContent;
         submitBtn.textContent = 'CREATING ACCOUNT...';
         submitBtn.disabled = true;
 
-        // Send signup request to backend
         const response = await fetch(`${API_BASE_URL}/auth/register`, {
           method: 'POST',
           headers: {
@@ -1703,10 +1327,8 @@
         if (response.ok) {
           showSuccess('signupFormSuccess', 'Account created successfully! Please check your email for verification.');
 
-          // Clear form
           signupForm.reset();
 
-          // If login token provided, store it
           if (data.token) {
             const userInfo = {
               email: email,
@@ -1722,7 +1344,6 @@
               showToast('Account created successfully!', 'success');
             }, 2000);
           } else {
-            // Switch to login after delay
             setTimeout(() => {
               switchToLogin();
             }, 2000);
@@ -1736,8 +1357,64 @@
         console.error('Signup error:', error);
         showError('signupFormError', 'Network error. Please check your connection and try again.');
       } finally {
-        // Restore button state
         const submitBtn = signupForm.querySelector('.form-submit');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Handle forgot password form submission
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    forgotPasswordForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      clearFormErrors('forgotPasswordModal');
+
+      const email = document.getElementById('forgotEmail').value.trim();
+
+      if (!email) {
+        showError('forgotEmailError', 'Email is required');
+        return;
+      } else if (!validateEmail(email)) {
+        showError('forgotEmailError', 'Please enter a valid email');
+        return;
+      }
+
+      try {
+        const submitBtn = document.getElementById('forgotPasswordBtn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'SENDING...';
+        submitBtn.disabled = true;
+
+        const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showSuccess('forgotPasswordFormSuccess', 'Password reset link sent! Check your email.');
+
+          forgotPasswordForm.reset();
+
+          setTimeout(() => {
+            closeModal('forgotPasswordModal');
+            showToast('Password reset email sent successfully!', 'success');
+          }, 3000);
+
+        } else {
+          showError('forgotPasswordFormError', data.message || 'Failed to send reset link. Please try again.');
+        }
+
+      } catch (error) {
+        console.error('Forgot password error:', error);
+        showError('forgotPasswordFormError', 'Network error. Please check your connection and try again.');
+      } finally {
+        const submitBtn = document.getElementById('forgotPasswordBtn');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       }
@@ -1770,18 +1447,15 @@
     }
   });
 
-  // Explore more functionality - now with login check
   function exploreMore() {
     const { isLoggedIn } = CookieManager.getAuth();
 
     if (isLoggedIn) {
-      // If user is logged in, redirect to profile setup
       showToast('Redirecting to profile setup...', 'success');
       setTimeout(() => {
         window.location.href = 'profileSetUp.html';
       }, 1000);
     } else {
-      // If not logged in, show features and suggest signup
       document.querySelector('.features').scrollIntoView({
         behavior: 'smooth'
       });
@@ -1804,7 +1478,6 @@
     }
   });
 
-  // Dynamically adjust particle count based on screen size
   function getParticleCount() {
     const width = window.innerWidth;
     if (width > 1920) return 80;
@@ -1815,7 +1488,6 @@
     return 15;
   }
 
-  // Detect device performance and adjust animations
   function checkPerformance() {
     const isLowPerformance = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isOldBrowser = !window.CSS || !CSS.supports('backdrop-filter', 'blur(10px)');
@@ -1829,7 +1501,6 @@
     }
   }
 
-  // Readjust when window size changes
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -1855,19 +1526,16 @@
     updateAuthUI();
     showCookieBanner();
 
-    // Add page loading animation
     document.body.style.opacity = '0';
     setTimeout(() => {
       document.body.style.transition = 'opacity 1s ease';
       document.body.style.opacity = '1';
     }, 100);
 
-    // Check for existing auth on page load
     const { isLoggedIn, userInfo } = CookieManager.getAuth();
     if (isLoggedIn && userInfo) {
       showToast(`Welcome back, ${userInfo.name || userInfo.email}!`, 'success');
 
-      // Auto-redirect logged in users to profile setup if they're on the main page
       setTimeout(() => {
         const shouldRedirect = confirm('You are already logged in. Would you like to go to your profile setup?');
         if (shouldRedirect) {
@@ -1915,13 +1583,12 @@
   `;
   document.head.appendChild(style);
 
-  // Auto-logout on token expiration (optional)
+  // Auto-logout on token expiration
   function checkTokenExpiration() {
     const { token, isLoggedIn } = CookieManager.getAuth();
 
     if (isLoggedIn && token) {
       try {
-        // Basic JWT expiration check (if using JWT tokens)
         const payload = JSON.parse(atob(token.split('.')[1]));
         const currentTime = Math.floor(Date.now() / 1000);
 
@@ -1930,23 +1597,19 @@
           showToast('Session expired. Please login again.', 'error');
         }
       } catch (e) {
-        // If token is not JWT or parsing fails, continue normally
         console.warn('Token expiration check failed:', e);
       }
     }
   }
 
-  // Check token expiration every 5 minutes
   setInterval(checkTokenExpiration, 5 * 60 * 1000);
 
-  // Save user preferences example
   function saveUserPreferences(preferences) {
     if (canUseCookies()) {
       CookieManager.setPreferences(preferences);
     }
   }
 
-  // Load user preferences example
   function loadUserPreferences() {
     if (canUseCookies()) {
       return CookieManager.getPreferences();
