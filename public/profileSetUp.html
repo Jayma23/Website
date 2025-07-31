@@ -538,6 +538,94 @@
       font-weight: 600;
     }
 
+    /* Areas and regions styling */
+    .region-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .region-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .region-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .select-all-text {
+      color: #667eea;
+      font-size: 0.875rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .area-buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .area-button {
+      padding: 0.5rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 20px;
+      background: rgba(248, 250, 252, 0.8);
+      color: #6b7280;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .area-button:hover {
+      border-color: #c4b5fd;
+      transform: translateY(-1px);
+    }
+
+    .area-button.selected {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-color: #f59e0b;
+      color: #92400e;
+      font-weight: 600;
+    }
+
+    /* Scale buttons for extroversion */
+    .scale-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .scale-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: 2px solid #e5e7eb;
+      background: rgba(248, 250, 252, 0.8);
+      color: #6b7280;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scale-button:hover {
+      border-color: #c4b5fd;
+      transform: translateY(-1px);
+    }
+
+    .scale-button.selected {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
     /* Premium bottom action bar */
     .bottom-actions {
       position: fixed;
@@ -628,6 +716,97 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* Tips container styling */
+    .tips-container {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .tips-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #059669;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tip-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      color: #047857;
+      font-size: 0.9rem;
+    }
+
+    .tip-icon {
+      color: #10b981;
+      font-size: 1rem;
+    }
+
+    /* Character counter */
+    .character-counter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .valid-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #10b981;
+      font-weight: 500;
+    }
+
+    /* Age range input styling */
+    .age-range-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .age-inputs-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .age-input {
+      width: 80px;
+      padding: 0.75rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1rem;
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    .age-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
+
+    .age-separator {
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .age-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
     /* Responsive design */
     @media (max-width: 768px) {
       .header {
@@ -686,57 +865,6 @@
       0% { transform: scale(1); }
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
-    }
-
-    /* Tips container styling */
-    .tips-container {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 15px;
-      padding: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .tips-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #059669;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .tip-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-      color: #047857;
-      font-size: 0.9rem;
-    }
-
-    .tip-icon {
-      color: #10b981;
-      font-size: 1rem;
-    }
-
-    /* Character counter */
-    .character-counter {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-
-    .valid-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      color: #10b981;
-      font-weight: 500;
     }
   </style>
 </head>
@@ -800,6 +928,7 @@
     photos: [null, null, null, null, null]
   };
   let isSubmitting = false;
+  let uploading = null;
 
   const totalSteps = 4;
   const stepData = [
@@ -896,268 +1025,365 @@
     const uploadedCount = answers.photos.filter(p => p).length;
 
     return `
-                <div class="input-group">
-                    <p class="subtitle">Add ${5 - uploadedCount} more photos (at least 1 required)</p>
+      <div class="input-group">
+        <p class="subtitle">Add ${5 - uploadedCount} more photos (at least 1 required)</p>
 
-                    <div class="photo-grid">
-                        <div class="main-photo-row">
-                            ${renderPhotoCard(0, true)}
-                        </div>
-                        <div class="photo-row">
-                            ${renderPhotoCard(1)}
-                            ${renderPhotoCard(2)}
-                        </div>
-                        <div class="photo-row">
-                            ${renderPhotoCard(3)}
-                            ${renderPhotoCard(4)}
-                        </div>
-                    </div>
+        <div class="photo-grid">
+          <div class="main-photo-row">
+            ${renderPhotoCard(0, true)}
+          </div>
+          <div class="photo-row">
+            ${renderPhotoCard(1)}
+            ${renderPhotoCard(2)}
+          </div>
+          <div class="photo-row">
+            ${renderPhotoCard(3)}
+            ${renderPhotoCard(4)}
+          </div>
+        </div>
 
-                    <div class="tips-container">
-                        <div class="tips-title">📸 Photo Tips</div>
-                        <div class="tip-item">
-                            <span class="tip-icon">✓</span>
-                            <span>Use clear, well-lit photos</span>
-                        </div>
-                        <div class="tip-item">
-                            <span class="tip-icon">✓</span>
-                            <span>Show your genuine smile</span>
-                        </div>
-                        <div class="tip-item">
-                            <span class="tip-icon">✓</span>
-                            <span>More photos = better matches</span>
-                        </div>
-                    </div>
-                </div>
-            `;
+        <div class="tips-container">
+          <div class="tips-title">📸 Photo Tips</div>
+          <div class="tip-item">
+            <span class="tip-icon">✓</span>
+            <span>Use clear, well-lit photos</span>
+          </div>
+          <div class="tip-item">
+            <span class="tip-icon">✓</span>
+            <span>Show your genuine smile</span>
+          </div>
+          <div class="tip-item">
+            <span class="tip-icon">✓</span>
+            <span>More photos = better matches</span>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   function renderPhotoCard(index, isMain = false) {
     const photo = answers.photos[index];
     const cardClass = isMain ? 'photo-card main-photo-card' : 'photo-card';
+    const isUploading = uploading === index;
 
     if (photo) {
       return `
-                    <div class="${cardClass}" onclick="pickImage(${index})">
-                        <img src="${photo}" alt="Photo ${index + 1}" class="uploaded-photo">
-                        <button class="remove-photo-btn" onclick="removePhoto(${index}); event.stopPropagation()">×</button>
-                        ${isMain ? '<div class="main-photo-label">Main</div>' : ''}
-                    </div>
-                `;
+        <div class="${cardClass}" id="photo_card_${index}" onclick="pickImage(${index})">
+          <img src="${photo}" alt="Photo ${index + 1}" class="uploaded-photo" id="photo_img_${index}">
+          <button class="remove-photo-btn" id="remove_btn_${index}" onclick="removePhoto(${index}); event.stopPropagation()">×</button>
+          ${isMain ? '<div class="main-photo-label">Main</div>' : ''}
+        </div>
+      `;
+    } else if (isUploading) {
+      return `
+        <div class="${cardClass}" id="photo_card_uploading_${index}">
+          <div class="photo-placeholder">
+            <div class="loading-spinner"></div>
+            <div style="margin-top: 0.5rem;">Uploading...</div>
+          </div>
+        </div>
+      `;
     } else {
       return `
-                    <div class="${cardClass}" onclick="pickImage(${index})">
-                        <div class="photo-placeholder">
-                            <div class="photo-placeholder-icon">📷</div>
-                            <div>${isMain ? 'Main Photo' : `Photo ${index + 1}`}</div>
-                        </div>
-                    </div>
-                `;
+        <div class="${cardClass}" id="photo_card_empty_${index}" onclick="pickImage(${index})">
+          <div class="photo-placeholder">
+            <div class="photo-placeholder-icon">📷</div>
+            <div>${isMain ? 'Main Photo' : `Photo ${index + 1}`}</div>
+          </div>
+        </div>
+      `;
     }
   }
 
   // Basic info step
   function renderBasicInfoStep() {
+    const areas = {
+      'San Francisco': ['Downtown', 'Mission', 'Sunset', 'Castro / Noe Valley', 'SoMa', 'Marina', 'North Beach'],
+      'Peninsula': ['Daly City', 'San Mateo', 'Redwood City', 'Menlo Park', 'Palo Alto', 'Mountain View'],
+      'South Bay': ['Sunnyvale', 'Cupertino', 'San Jose', 'Santa Clara'],
+      'East Bay & North Bay': ['Albany', 'Berkeley', 'Emeryville', 'Fremont', 'Hayward', 'Oakland', 'San Rafael', 'Vallejo', 'Napa']
+    };
+
+    const ethnicities = [
+      'American Indian', 'Black/African Descent', 'East Asian', 'Hispanic/Latino',
+      'Middle Eastern', 'Pacific Islander', 'South Asian', 'White/Caucasian', 'Other', 'Prefer not to say'
+    ];
+
     return `
-                <div class="input-group">
-                    <label class="label">
-                        What's your name? <span class="required-star">*</span>
-                    </label>
-                    <div class="input-container">
-                        <span class="input-icon">👤</span>
-                        <input type="text" class="text-input" placeholder="Your name"
-                               value="${answers.name || ''}" onchange="updateAnswer('name', this.value)">
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">
+          What's your name? <span class="required-star">*</span>
+        </label>
+        <div class="input-container">
+          <span class="input-icon">👤</span>
+          <input type="text" class="text-input" placeholder="Your name"
+                 id="name_input"
+                 value="${answers.name || ''}" onchange="updateAnswer('name', this.value)">
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What's your phone number?</label>
-                    <p class="subtitle">Phone number is needed to receive important updates. It will ONLY be shared with your confirmed date.</p>
-                    <div class="input-container">
-                        <span class="input-icon">📱</span>
-                        <input type="tel" class="text-input" placeholder="Phone number"
-                               value="${answers.phone || ''}" onchange="updateAnswer('phone', this.value)">
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What's your phone number?</label>
+        <p class="subtitle">Phone number is needed to receive important updates. It will ONLY be shared with your confirmed date.</p>
+        <div class="input-container">
+          <span class="input-icon">📱</span>
+          <input type="tel" class="text-input" placeholder="Phone number"
+                 id="phone_input"
+                 value="${answers.phone || ''}" onchange="updateAnswer('phone', this.value)">
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">How old are you?</label>
-                    <div class="input-container">
-                        <span class="input-icon">📅</span>
-                        <input type="number" class="text-input" placeholder="Age" min="18" max="99"
-                               value="${answers.age || ''}" onchange="updateAnswer('age', this.value)">
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">How old are you?</label>
+        <div class="input-container">
+          <span class="input-icon">📅</span>
+          <input type="number" class="text-input" placeholder="Age" min="18" max="99"
+                 id="age_input"
+                 value="${answers.age || ''}" onchange="updateAnswer('age', this.value)">
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">How tall are you?</label>
-                    <p class="subtitle">e.g.: 180cm</p>
-                    <div class="input-container">
-                        <span class="input-icon">📏</span>
-                        <input type="text" class="text-input" placeholder="Height in cm"
-                               value="${answers.height || ''}" onchange="updateAnswer('height', this.value)">
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">How tall are you?</label>
+        <p class="subtitle">e.g.: 180cm</p>
+        <div class="input-container">
+          <span class="input-icon">📏</span>
+          <input type="text" class="text-input" placeholder="Height in cm"
+                 id="height_input"
+                 value="${answers.height || ''}" onchange="updateAnswer('height', this.value)">
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What's your gender?</label>
-                    <div class="options-container">
-                        ${renderOptions(['Female', 'Male', 'Nonbinary'], 'gender')}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What's your gender?</label>
+        <div class="options-container">
+          ${renderOptions(['Female', 'Male', 'Nonbinary'], 'gender')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What's your sexuality?</label>
-                    <div class="options-container">
-                        ${renderOptions(['Straight', 'Gay', 'Lesbian', 'Bisexual', 'Pansexual', 'Asexual', 'Other', 'Prefer not to say'], 'sexuality')}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What's your sexuality?</label>
+        <div class="options-container">
+          ${renderOptions(['Straight', 'Gay', 'Lesbian', 'Bisexual', 'Pansexual', 'Asexual', 'Other', 'Prefer not to say'], 'sexuality')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What's your ethnicity?</label>
-                    <p class="subtitle">Select all that apply</p>
-                    <div class="options-container">
-                        ${renderMultiOptions(['American Indian', 'Black/African Descent', 'East Asian', 'Hispanic/Latino', 'Middle Eastern', 'Pacific Islander', 'South Asian', 'White/Caucasian', 'Other', 'Prefer not to say'], 'ethnicity')}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What's your ethnicity?</label>
+        <p class="subtitle">Select all that apply</p>
+        <div class="options-container">
+          ${renderMultiOptions(ethnicities, 'ethnicity')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What's your zip code?</label>
-                    <div class="input-container">
-                        <span class="input-icon">📍</span>
-                        <input type="text" class="text-input" placeholder="94704"
-                               value="${answers.zipCode || ''}" onchange="updateAnswer('zipCode', this.value)">
-                    </div>
-                </div>
-            `;
+      <div class="input-group">
+        <label class="label">On a scale of 0-10, how extroverted are you?</label>
+        <div class="scale-container">
+          ${renderScaleButtons(0, 10, 'extroversion')}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your zip code?</label>
+        <div class="input-container">
+          <span class="input-icon">📍</span>
+          <input type="text" class="text-input" placeholder="94704"
+                 id="zipcode_input"
+                 value="${answers.zipCode || ''}" onchange="updateAnswer('zipCode', this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">Pick the areas you're comfortable going to for an in-person date.</label>
+        <p class="subtitle">Select all that apply</p>
+        ${renderAreas(areas)}
+      </div>
+    `;
   }
 
   // Preferences step
   function renderPreferencesStep() {
     return `
-                <div class="input-group">
-                    <label class="label">What is your dating intention?</label>
-                    <p class="subtitle">Select all that apply</p>
-                    <div class="options-container">
-                        ${renderMultiOptions(['Life partner', 'Long-term relationship', 'Short-term relationship', 'Making new friends', 'Prefer not to say'], 'datingIntentions')}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What is your dating intention?</label>
+        <p class="subtitle">Select all that apply</p>
+        <div class="options-container">
+          ${renderMultiOptions(['Life partner', 'Long-term relationship', 'Short-term relationship', 'Making new friends', 'Prefer not to say'], 'datingIntentions')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">Who do you want to date?</label>
-                    <p class="subtitle">Select all who you're open to meeting</p>
-                    <div class="options-container">
-                        ${renderMultiOptions(['Men', 'Women', 'Nonbinary people', 'Everyone'], 'interestedIn')}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">Who do you want to date?</label>
+        <p class="subtitle">Select all who you're open to meeting</p>
+        <div class="options-container">
+          ${renderMultiOptions(['Men', 'Women', 'Nonbinary people', 'Everyone'], 'interestedIn')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What age range would you like to date?</label>
-                    <p class="subtitle">Current range: ${answers.ageRange ? answers.ageRange[0] + '-' + answers.ageRange[1] : '18-30'}</p>
-                    <div style="display: flex; gap: 1rem; align-items: center; justify-content: center;">
-                        <input type="number" class="text-input" placeholder="Min" min="18" max="99"
-                               style="width: 80px; text-align: center;"
-                               value="${answers.ageRange ? answers.ageRange[0] : 18}"
-                               onchange="updateAgeRange(0, this.value)">
-                        <span style="font-weight: 600; color: #6b7280;">to</span>
-                        <input type="number" class="text-input" placeholder="Max" min="18" max="99"
-                               style="width: 80px; text-align: center;"
-                               value="${answers.ageRange ? answers.ageRange[1] : 30}"
-                               onchange="updateAgeRange(1, this.value)">
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">What ethnicities are you attracted to?</label>
+        <p class="subtitle">Select all that apply</p>
+        <div class="options-container">
+          ${renderMultiOptions(['American Indian', 'Black/African Descent', 'East Asian', 'Hispanic/Latino', 'Middle Eastern', 'Pacific Islander', 'South Asian', 'White/Caucasian', 'Other', 'Prefer not to say'], 'ethnicityAttraction')}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">When dating, what are green flags for you?</label>
-                    <textarea class="textarea-input" placeholder="She is nice. She likes animals. She is extroverted..."
-                              onchange="updateAnswer('greenFlags', this.value)">${answers.greenFlags || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">What age range would you like to date?</label>
+        <p class="subtitle">Current range: ${answers.ageRange ? answers.ageRange[0] + '-' + answers.ageRange[1] : '18-30'}</p>
+        <div class="age-range-container">
+          <div class="age-label">Min: ${answers.ageRange ? answers.ageRange[0] : 18}</div>
+          <div class="age-inputs-container">
+            <input type="number" class="age-input" placeholder="Min" min="18" max="99"
+                   id="age_min_input"
+                   value="${answers.ageRange ? answers.ageRange[0] : 18}"
+                   onchange="updateAgeRange(0, this.value)">
+            <span class="age-separator">to</span>
+            <input type="number" class="age-input" placeholder="Max" min="18" max="99"
+                   id="age_max_input"
+                   value="${answers.ageRange ? answers.ageRange[1] : 30}"
+                   onchange="updateAgeRange(1, this.value)">
+          </div>
+          <div class="age-label">Max: ${answers.ageRange ? answers.ageRange[1] : 30}</div>
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">When dating, what are red flags for you?</label>
-                    <textarea class="textarea-input" placeholder="She is very rude and doesn't care..."
-                              onchange="updateAnswer('redFlags', this.value)">${answers.redFlags || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">When dating, what are green flags for you?</label>
+        <textarea class="textarea-input" placeholder="She is nice. She likes animals. She is extroverted..."
+                  id="green_flags_textarea"
+                  onchange="updateAnswer('greenFlags', this.value)">${answers.greenFlags || ''}</textarea>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What do you find physically attractive?</label>
-                    <textarea class="textarea-input" placeholder="She is tall and fit. She has big eyes..."
-                              onchange="updateAnswer('physicalAttraction', this.value)">${answers.physicalAttraction || ''}</textarea>
-                </div>
-            `;
+      <div class="input-group">
+        <label class="label">When dating, what are red flags for you?</label>
+        <textarea class="textarea-input" placeholder="She is very rude and doesn't care..."
+                  id="red_flags_textarea"
+                  onchange="updateAnswer('redFlags', this.value)">${answers.redFlags || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What do you find physically attractive?</label>
+        <textarea class="textarea-input" placeholder="She is tall and fit. She has big eyes..."
+                  id="physical_attraction_textarea"
+                  onchange="updateAnswer('physicalAttraction', this.value)">${answers.physicalAttraction || ''}</textarea>
+      </div>
+    `;
   }
 
   // Personality step
   function renderPersonalityStep() {
     return `
-                <div class="input-group">
-                    <label class="label">
-                        Tell us about yourself <span class="required-star">*</span>
-                    </label>
-                    <p class="subtitle">What makes you unique? Share your personality and what drives you</p>
-                    <textarea class="textarea-input" placeholder="I'm someone who loves..." maxlength="500"
-                              onchange="updateAnswer('aboutMe', this.value)" oninput="updateCharacterCount('aboutMe', this.value)">${answers.aboutMe || ''}</textarea>
-                    <div class="character-counter">
-                        <span>${(answers.aboutMe || '').length}/500 characters</span>
-                        ${(answers.aboutMe || '').length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
-                    </div>
-                </div>
+      <div class="input-group">
+        <label class="label">
+          Tell us about yourself <span class="required-star">*</span>
+        </label>
+        <p class="subtitle">What makes you unique? Share your personality and what drives you</p>
+        <textarea class="textarea-input" placeholder="I'm someone who loves..." maxlength="500"
+                  id="about_me_textarea"
+                  onchange="updateAnswer('aboutMe', this.value)" oninput="updateCharacterCount('aboutMe', this.value)">${answers.aboutMe || ''}</textarea>
+        <div class="character-counter" id="about_me_counter">
+          <span>${(answers.aboutMe || '').length}/500 characters</span>
+          ${(answers.aboutMe || '').length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
+        </div>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What are your interests and hobbies?</label>
-                    <p class="subtitle">What do you love doing in your free time?</p>
-                    <textarea class="textarea-input" placeholder="I'm passionate about..." maxlength="500"
-                              onchange="updateAnswer('hobbies', this.value)">${answers.hobbies || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">What are your interests and hobbies?</label>
+        <p class="subtitle">What do you love doing in your free time?</p>
+        <textarea class="textarea-input" placeholder="I'm passionate about..." maxlength="500"
+                  id="hobbies_textarea"
+                  onchange="updateAnswer('hobbies', this.value)">${answers.hobbies || ''}</textarea>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">Describe your lifestyle</label>
-                    <p class="subtitle">Are you more of a homebody or always exploring?</p>
-                    <textarea class="textarea-input" placeholder="My typical day involves..." maxlength="500"
-                              onchange="updateAnswer('lifestyle', this.value)">${answers.lifestyle || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">Describe your lifestyle</label>
+        <p class="subtitle">Are you more of a homebody or always exploring?</p>
+        <textarea class="textarea-input" placeholder="My typical day involves..." maxlength="500"
+                  id="lifestyle_textarea"
+                  onchange="updateAnswer('lifestyle', this.value)">${answers.lifestyle || ''}</textarea>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What values are most important to you?</label>
-                    <p class="subtitle">What principles guide your life and decisions?</p>
-                    <textarea class="textarea-input" placeholder="The values that matter most to me are..." maxlength="500"
-                              onchange="updateAnswer('values', this.value)">${answers.values || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">What values are most important to you?</label>
+        <p class="subtitle">What principles guide your life and decisions?</p>
+        <textarea class="textarea-input" placeholder="The values that matter most to me are..." maxlength="500"
+                  id="values_textarea"
+                  onchange="updateAnswer('values', this.value)">${answers.values || ''}</textarea>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">What are your dreams for the future?</label>
-                    <p class="subtitle">Where do you see yourself in 5 years?</p>
-                    <textarea class="textarea-input" placeholder="In the future, I hope to..." maxlength="500"
-                              onchange="updateAnswer('futureGoals', this.value)">${answers.futureGoals || ''}</textarea>
-                </div>
+      <div class="input-group">
+        <label class="label">What are your dreams for the future?</label>
+        <p class="subtitle">Where do you see yourself in 5 years?</p>
+        <textarea class="textarea-input" placeholder="In the future, I hope to..." maxlength="500"
+                  id="future_goals_textarea"
+                  onchange="updateAnswer('futureGoals', this.value)">${answers.futureGoals || ''}</textarea>
+      </div>
 
-                <div class="input-group">
-                    <label class="label">Describe your perfect date</label>
-                    <p class="subtitle">What would make for an amazing time together?</p>
-                    <textarea class="textarea-input" placeholder="My ideal date would be..." maxlength="500"
-                              onchange="updateAnswer('perfectDate', this.value)">${answers.perfectDate || ''}</textarea>
-                </div>
-            `;
+      <div class="input-group">
+        <label class="label">Describe your perfect date</label>
+        <p class="subtitle">What would make for an amazing time together?</p>
+        <textarea class="textarea-input" placeholder="My ideal date would be..." maxlength="500"
+                  id="perfect_date_textarea"
+                  onchange="updateAnswer('perfectDate', this.value)">${answers.perfectDate || ''}</textarea>
+      </div>
+    `;
   }
 
   // Helper functions for rendering options
   function renderOptions(options, key) {
-    return options.map(option => `
-                <div class="option-button ${answers[key] === option ? 'selected' : ''}"
-                     onclick="selectOption('${key}', '${option}')">
-                    ${option}
-                </div>
-            `).join('');
+    return options.map((option, index) => `
+      <div class="option-button ${answers[key] === option ? 'selected' : ''}"
+           id="${key}_option_${index}"
+           onclick="selectOption('${key}', '${option}')">
+        ${option}
+      </div>
+    `).join('');
   }
 
   function renderMultiOptions(options, key) {
     const selected = answers[key] || [];
-    return options.map(option => `
-                <div class="option-button ${selected.includes(option) ? 'selected' : ''}"
-                     onclick="toggleOption('${key}', '${option}')">
-                    ${option}
-                </div>
-            `).join('');
+    return options.map((option, index) => `
+      <div class="option-button ${selected.includes(option) ? 'selected' : ''}"
+           id="${key}_multi_option_${index}"
+           onclick="toggleOption('${key}', '${option}')">
+        ${option}
+      </div>
+    `).join('');
+  }
+
+  function renderScaleButtons(min, max, key) {
+    const buttons = [];
+    for (let i = min; i <= max; i++) {
+      buttons.push(`
+        <div class="scale-button ${answers[key] === i ? 'selected' : ''}"
+             id="${key}_scale_${i}"
+             onclick="selectOption('${key}', ${i})">
+          ${i}
+        </div>
+      `);
+    }
+    return buttons.join('');
+  }
+
+  function renderAreas(areas) {
+    return Object.entries(areas).map(([region, regionAreas], regionIndex) => `
+      <div class="region-container" id="region_${regionIndex}">
+        <div class="region-header">
+          <div class="region-title">${region}</div>
+          <div class="select-all-text" onclick="selectAllAreas(['${regionAreas.join("','")}'])">Select All</div>
+        </div>
+        <div class="area-buttons-container">
+          ${regionAreas.map((area, areaIndex) => `
+            <div class="area-button ${(answers.selectedAreas || []).includes(area) ? 'selected' : ''}"
+                 id="area_${regionIndex}_${areaIndex}"
+                 onclick="toggleArea('${area}')">
+              ${area}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
   }
 
   // Event handlers
@@ -1172,12 +1398,12 @@
 
   function updateCharacterCount(key, value) {
     answers[key] = value;
-    const counter = document.querySelector('.character-counter');
-    if (counter) {
+    const counter = document.getElementById('about_me_counter');
+    if (counter && key === 'aboutMe') {
       counter.innerHTML = `
-                    <span>${value.length}/500 characters</span>
-                    ${value.length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
-                `;
+        <span>${value.length}/500 characters</span>
+        ${value.length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
+      `;
     }
     updateNextButtonState();
   }
@@ -1188,11 +1414,13 @@
     updateNextButtonState();
 
     // Add pulse effect
-    const selectedElement = document.querySelector(`[onclick="selectOption('${key}', '${value}')"]`);
-    if (selectedElement) {
-      selectedElement.classList.add('pulse');
-      setTimeout(() => selectedElement.classList.remove('pulse'), 300);
-    }
+    setTimeout(() => {
+      const selectedElement = document.querySelector(`[onclick*="selectOption('${key}', '${value}')"]`);
+      if (selectedElement) {
+        selectedElement.classList.add('pulse');
+        setTimeout(() => selectedElement.classList.remove('pulse'), 300);
+      }
+    }, 10);
   }
 
   function toggleOption(key, value) {
@@ -1203,6 +1431,34 @@
       answers[key].splice(index, 1);
     } else {
       answers[key].push(value);
+    }
+
+    renderCurrentStep();
+    updateNextButtonState();
+  }
+
+  function toggleArea(area) {
+    if (!answers.selectedAreas) answers.selectedAreas = [];
+
+    const index = answers.selectedAreas.indexOf(area);
+    if (index > -1) {
+      answers.selectedAreas.splice(index, 1);
+    } else {
+      answers.selectedAreas.push(area);
+    }
+
+    renderCurrentStep();
+    updateNextButtonState();
+  }
+
+  function selectAllAreas(regionAreas) {
+    if (!answers.selectedAreas) answers.selectedAreas = [];
+
+    const allSelected = regionAreas.every(area => answers.selectedAreas.includes(area));
+    if (allSelected) {
+      answers.selectedAreas = answers.selectedAreas.filter(area => !regionAreas.includes(area));
+    } else {
+      answers.selectedAreas = [...new Set([...answers.selectedAreas, ...regionAreas])];
     }
 
     renderCurrentStep();
@@ -1222,7 +1478,7 @@
     updateNextButtonState();
   }
 
-  // Photo handling
+  // Photo handling with simulated upload
   function pickImage(index) {
     const input = document.createElement('input');
     input.type = 'file';
@@ -1230,18 +1486,34 @@
     input.onchange = function(event) {
       const file = event.target.files[0];
       if (file) {
-        // For demo purposes, create a local URL
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          answers.photos[index] = e.target.result;
-          renderCurrentStep();
-          updateNextButtonState();
-          showNotification('Photo uploaded successfully!', 'success');
-        };
-        reader.readAsDataURL(file);
+        simulateUpload(file, index);
       }
     };
     input.click();
+  }
+
+  async function simulateUpload(file, index) {
+    uploading = index;
+    renderCurrentStep();
+
+    try {
+      // Create a local URL for demo purposes
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        answers.photos[index] = e.target.result;
+        showNotification('Photo uploaded successfully!', 'success');
+        uploading = null;
+        renderCurrentStep();
+        updateNextButtonState();
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Upload error:', error);
+      showNotification('Failed to upload photo. Please try again.', 'error');
+      uploading = null;
+      renderCurrentStep();
+      updateNextButtonState();
+    }
   }
 
   function removePhoto(index) {
@@ -1264,8 +1536,6 @@
       currentStep++;
       updateUI();
       renderCurrentStep();
-
-      // Smooth scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       submitAnswers();
@@ -1280,7 +1550,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       if (confirm('Are you sure you want to leave? Your progress will be lost.')) {
-        window.history.back();
+        window.location.href = 'home.html';
       }
     }
   }
@@ -1293,7 +1563,7 @@
 
   function goHome() {
     if (confirm('Are you sure you want to go home? Your progress will be lost.')) {
-      window.location.href = '/index.html';
+      window.location.href = 'home.html';
     }
   }
 
@@ -1345,7 +1615,8 @@
       showNotification('Profile completed successfully! 🎉', 'success');
 
       setTimeout(() => {
-        window.location.href = '/home';
+        // For demo, just reload the page
+        window.location.reload();
       }, 2000);
 
     } catch (error) {
@@ -1367,23 +1638,23 @@
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.style.cssText = `
-                position: fixed;
-                top: 2rem;
-                right: 2rem;
-                background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
       type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
         'linear-gradient(135deg, #667eea, #764ba2)'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 15px;
-                font-weight: 600;
-                z-index: 1000;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                transform: translateX(400px);
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                max-width: 300px;
-                backdrop-filter: blur(20px);
-            `;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transform: translateX(400px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 300px;
+      backdrop-filter: blur(20px);
+    `;
     notification.textContent = message;
 
     document.body.appendChild(notification);
@@ -1411,6 +1682,9 @@
     container.innerHTML = '';
     createParticles();
   });
+
+  // Initialize next button state
+  updateNextButtonState();
 
 </script>
 </body>
