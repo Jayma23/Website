@@ -922,6 +922,63 @@
 </div>
 
 <script>
+  // Cloudinary configuration - 使用构建工具注入的环境变量
+  const CLOUDINARY_CONFIG = {
+    uploadUrl: process.env.CLOUDINARY_UPLOAD_URL,
+    uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET
+  };
+
+  // 验证环境变量是否正确加载
+
+
+  // Cookie management utilities
+  const CookieManager = {
+    get: function(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) {
+          return decodeURIComponent(c.substring(nameEQ.length, c.length));
+        }
+      }
+      return null;
+    },
+
+    set: function(name, value, days = 7) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = '; expires=' + date.toUTCString();
+      document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax`;
+    },
+
+    getAuth: function() {
+      const userId = this.get('user_id');
+      const name = this.get('name1');
+      const email = this.get('email1');
+      const photo = this.get('photo');
+      const token = this.get('token');
+
+      return {
+        userId,
+        name,
+        email,
+        photo,
+        token,
+        isLoggedIn: !!(userId && token)
+      };
+    },
+
+    setAuth: function(authData) {
+      if (authData.userId) this.set('user_id', authData.userId);
+      if (authData.name) this.set('name1', authData.name);
+      if (authData.email) this.set('email1', authData.email);
+      if (authData.photo) this.set('photo', authData.photo);
+      if (authData.token) this.set('token', authData.token);
+    }
+  };
+
   // Global state
   let currentStep = 0;
   let answers = {
@@ -956,10 +1013,23 @@
 
   // Initialize app
   document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication
+    const { isLoggedIn } = CookieManager.getAuth();
+    if (!isLoggedIn) {
+      // Redirect to login if not authenticated
+      window.location.href = 'index.html';
+      return;
+    }
+
     createParticles();
     updateUI();
     renderCurrentStep();
   });
+
+  // Word count utility function (matching React Native version)
+  function countWords(text) {
+    return text.trim().split(/\s+/).filter(Boolean).length;
+  }
 
   // Create floating particles
   function createParticles() {
@@ -1392,6 +1462,16 @@
   }
 
   function updateAnswer(key, value) {
+    // Add word count validation for text fields (matching React Native)
+    const textFields = ['name', 'phone', 'height', 'zipCode', 'greenFlags', 'redFlags', 'physicalAttraction', 'hobbies', 'aboutMe', 'lifestyle', 'values', 'futureGoals', 'perfectDate'];
+
+    if (textFields.includes(key) && typeof value === 'string') {
+      if (countWords(value) > 200) {
+        showNotification('Please limit your answer to 200 words.', 'error');
+        return;
+      }
+    }
+
     answers[key] = value;
     updateNextButtonState();
   }
@@ -1478,7 +1558,7 @@
     updateNextButtonState();
   }
 
-  // Photo handling with simulated upload
+  // Photo handling with Cloudinary upload (matching React Native implementation)
   function pickImage(index) {
     const input = document.createElement('input');
     input.type = 'file';
@@ -1486,30 +1566,41 @@
     input.onchange = function(event) {
       const file = event.target.files[0];
       if (file) {
-        simulateUpload(file, index);
+        uploadToCloudinary(file, index);
       }
     };
     input.click();
   }
 
-  async function simulateUpload(file, index) {
+  async function uploadToCloudinary(file, index) {
     uploading = index;
     renderCurrentStep();
 
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+
     try {
-      // Create a local URL for demo purposes
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        answers.photos[index] = e.target.result;
+      const response = await fetch(CLOUDINARY_CONFIG.uploadUrl, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.secure_url) {
+        // Update the photos array correctly
+        const newPhotos = [...answers.photos];
+        newPhotos[index] = data.secure_url;
+        answers.photos = newPhotos;
         showNotification('Photo uploaded successfully!', 'success');
-        uploading = null;
-        renderCurrentStep();
-        updateNextButtonState();
-      };
-      reader.readAsDataURL(file);
+      } else {
+        throw new Error('Upload failed');
+      }
     } catch (error) {
       console.error('Upload error:', error);
       showNotification('Failed to upload photo. Please try again.', 'error');
+    } finally {
       uploading = null;
       renderCurrentStep();
       updateNextButtonState();
@@ -1594,7 +1685,7 @@
     }
   }
 
-  // Submit answers
+  // Submit answers - fully compatible with React Native backend
   async function submitAnswers() {
     if (isSubmitting) return;
 
@@ -1606,22 +1697,90 @@
     nextBtn.disabled = true;
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const { userId } = CookieManager.getAuth();
+      if (!userId) {
+        throw new Error('User not found. Please login again.');
+      }
 
-      // Here you would send data to your backend
-      console.log('Submitting answers:', answers);
+      // First submit basic profile data (matching React Native API call)
+      const profileData = {
+        user_id: userId,
+        name: answers.name?.trim() || '',
+        height: answers.height?.trim() || null,
+        age: /^\d+$/.test(answers.age) ? parseInt(answers.age) : null,
+        gender: answers.gender?.trim() || null,
+        orientation: answers.sexuality?.trim() || null,
+        photo_urls: answers.photos?.filter(p => p) || [],
+        primary_index: 0
+      };
 
-      showNotification('Profile completed successfully! 🎉', 'success');
+      const profileResponse = await fetch('https://ccbackendx-2.onrender.com/personality/submit-responses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profileData)
+      });
 
-      setTimeout(() => {
-        // For demo, just reload the page
-        window.location.reload();
-      }, 2000);
+      if (!profileResponse.ok) {
+        throw new Error('Failed to submit profile data');
+      }
+
+      // Then submit AI matching data (matching React Native implementation)
+      const aiMatchingData = {
+        user_id: userId,
+        questionnaire_answers: {
+          ...answers,
+          phone: answers.phone || '',
+          birthday: answers.birthday || '',
+          ethnicity: answers.ethnicity || [],
+          extroversion: answers.extroversion || 5,
+          zipCode: answers.zipCode || '',
+          selectedAreas: answers.selectedAreas || [],
+          datingIntentions: answers.datingIntentions || [],
+          interestedIn: answers.interestedIn || [],
+          ethnicityAttraction: answers.ethnicityAttraction || [],
+          ageRange: answers.ageRange || [18, 30],
+          greenFlags: answers.greenFlags || '',
+          redFlags: answers.redFlags || '',
+          physicalAttraction: answers.physicalAttraction || '',
+          hobbies: answers.hobbies || '',
+          lifestyle: answers.lifestyle || '',
+          values: answers.values || '',
+          futureGoals: answers.futureGoals || '',
+          perfectDate: answers.perfectDate || ''
+        },
+        completed_at: new Date().toISOString(),
+        total_words: Object.values(answers).join(' ').split(' ').length
+      };
+
+      // Update authentication data
+      const updatedAuth = {
+        userId: userId,
+        name: answers.name || CookieManager.get('name1'),
+        email: CookieManager.get('email1'),
+        photo: answers.photos[0] || CookieManager.get('photo'),
+        token: CookieManager.get('token')
+      };
+      CookieManager.setAuth(updatedAuth);
+
+      const saveResponse = await fetch('https://ccbackendx-2.onrender.com/personality/save-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(aiMatchingData)
+      });
+
+      if (saveResponse.ok) {
+        showNotification('Profile completed successfully! 🎉', 'success');
+
+        setTimeout(() => {
+          window.location.href = 'home.html';
+        }, 2000);
+      } else {
+        throw new Error('Failed to save your profile. Please try again.');
+      }
 
     } catch (error) {
-      console.error('Error submitting:', error);
-      showNotification('Failed to submit profile. Please try again.', 'error');
+      console.error('Error submitting questionnaire:', error);
+      showNotification(error.message || 'Network error. Please check your connection.', 'error');
 
       nextBtn.innerHTML = originalText;
       nextBtn.disabled = false;
