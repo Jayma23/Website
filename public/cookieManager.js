@@ -57,20 +57,31 @@ const CookieManager = {
     const isLoggedIn = this.get('isLoggedIn') === 'true';
 
     let userInfo = null;
+
     if (userInfoStr) {
       try {
-        userInfo = JSON.parse(userInfoStr);
+        // ✅ 加上 decodeURIComponent 来修复 JSON.parse 报错的问题
+        const decoded = decodeURIComponent(userInfoStr);
+        userInfo = JSON.parse(decoded);
       } catch (e) {
-        console.warn('Failed to parse user info from cookie:', e);
+        console.warn('❗ Failed to parse user info from cookie:', e);
       }
     }
+
+    // ✅ 添加日志调试
+    console.log('💬 getAuth() 返回信息：', {
+      token,
+      userInfo,
+      isLoggedIn
+    });
 
     return {
       token,
       userInfo,
-      isLoggedIn: isLoggedIn && token
+      isLoggedIn: isLoggedIn && !!token && !!userInfo
     };
   },
+
 
   clearAuth: function() {
     this.delete('authToken');
