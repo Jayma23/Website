@@ -13,7 +13,7 @@ module.exports = merge(common, {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'public/img', to: 'img' },
+        /*{ from: 'public/img', to: 'img' },
         { from: 'public/css', to: 'css' },
         { from: 'public/js/vendor', to: 'js/vendor' },
         { from: 'public/icon.svg', to: 'icon.svg' },
@@ -21,7 +21,7 @@ module.exports = merge(common, {
         { from: 'public/robots.txt', to: 'robots.txt' },
         { from: 'public/icon.png', to: 'icon.png' },
         { from: 'public/404.html', to: '404.html' },
-        { from: 'public/site.webmanifest', to: 'site.webmanifest' },
+        { from: 'public/site.webmanifest', to: 'site.webmanifest' },*/
       ],
     }),
   ],
