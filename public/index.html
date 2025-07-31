@@ -1640,7 +1640,7 @@
       // Clear previous errors
       clearFormErrors('signupModal');
 
-      
+
       const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPassword').value;
       const confirmPassword = document.getElementById('signupConfirmPassword').value;
@@ -1685,7 +1685,7 @@
       try {
         // Show loading state
         const submitBtn = signupForm.querySelector('.form-submit');
-        const originalText = submitBtn.textContent;
+        
         submitBtn.textContent = 'CREATING ACCOUNT...';
         submitBtn.disabled = true;
 
