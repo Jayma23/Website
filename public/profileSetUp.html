@@ -1245,6 +1245,8 @@
   }
   async function submitAnswers() {
     const { userInfo } = CookieManager.getAuth();
+    const auth = CookieManager.getAuth();
+    const token = auth?.token;
     if (!userInfo?.id) {
       alert('User not logged in or missing ID.');
       return;
@@ -1296,7 +1298,8 @@
       // 提交基本资料
       const res1 = await fetch('https://ccbackendx-2.onrender.com/personality/submit-responses', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`},
         body: JSON.stringify(profileData)
       });
 
@@ -1305,7 +1308,8 @@
       // 提交问卷
       const res2 = await fetch('https://ccbackendx-2.onrender.com/personality/save-profile', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`},
         body: JSON.stringify(aiMatchingData)
       });
 

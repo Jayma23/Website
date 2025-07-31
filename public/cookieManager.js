@@ -1,5 +1,5 @@
 const CookieManager = {
-  set: function(name, value, days = 30, path = '/', secure = true, sameSite = 'Lax') {
+  set(name, value, days = 30, path = '/', secure = true, sameSite = 'Lax') {
     let expires = '';
     if (days) {
       const date = new Date();
@@ -13,95 +13,81 @@ const CookieManager = {
     document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=${path}${secureFlag}${sameSiteFlag}`;
   },
 
-  get: function(name) {
+  get(name) {
     const nameEQ = name + '=';
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') c = c.substring(1);
-      if (c.indexOf(nameEQ) === 0) {
-        return decodeURIComponent(c.substring(nameEQ.length));
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(nameEQ)) {
+        return decodeURIComponent(cookie.substring(nameEQ.length));
       }
     }
     return null;
   },
 
-  delete: function(name, path = '/') {
+  delete(name, path = '/') {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}`;
   },
 
-  isEnabled: function() {
+  isEnabled() {
     try {
-      const testKey = 'cookieTest';
-      this.set(testKey, 'test', 1);
-      const isEnabled = this.get(testKey) === 'test';
-      this.delete(testKey);
-      return isEnabled;
-    } catch (e) {
+      this.set('cookieTest', 'test', 1);
+      const enabled = this.get('cookieTest') === 'test';
+      this.delete('cookieTest');
+      return enabled;
+    } catch {
       return false;
     }
   },
 
-  setAuth: function(token, userInfo = null, rememberMe = false) {
-    const expireDays = rememberMe ? 30 : 7;
-    this.set('authToken', token, expireDays);
-    if (userInfo) {
-      this.set('userInfo', JSON.stringify(userInfo), expireDays);
-    }
-    this.set('isLoggedIn', 'true', expireDays);
+  setAuth(token, userInfo = {}, rememberMe = false) {
+    const days = rememberMe ? 30 : 7;
+    this.set('authToken', token, days);
+    this.set('userInfo', JSON.stringify(userInfo), days);
+    this.set('isLoggedIn', 'true', days);
   },
 
-  getAuth: function() {
+  getAuth() {
     const token = this.get('authToken');
     const userInfoStr = this.get('userInfo');
     const isLoggedIn = this.get('isLoggedIn') === 'true';
 
     let userInfo = null;
-
-    if (userInfoStr) {
-      try {
-        // ✅ 加上 decodeURIComponent 来修复 JSON.parse 报错的问题
-        const decoded = decodeURIComponent(userInfoStr);
-        userInfo = JSON.parse(decoded);
-      } catch (e) {
-        console.warn('❗ Failed to parse user info from cookie:', e);
-      }
+    try {
+      userInfo = userInfoStr ? JSON.parse(userInfoStr) : null;
+    } catch (e) {
+      console.warn('❗ Failed to parse userInfo:', e);
     }
 
-    // ✅ 添加日志调试
-    console.log('💬 getAuth() 返回信息：', {
-      token,
-      userInfo,
-      isLoggedIn
-    });
-
-    return {
+    const authData = {
       token,
       userInfo,
       isLoggedIn: isLoggedIn && !!token && !!userInfo
     };
+
+    console.log('💬 CookieManager.getAuth():', authData);
+    return authData;
   },
 
-
-  clearAuth: function() {
+  clearAuth() {
     this.delete('authToken');
     this.delete('userInfo');
     this.delete('isLoggedIn');
   },
 
-  setPreferences: function(preferences) {
+  setPreferences(preferences) {
     this.set('userPrefs', JSON.stringify(preferences), 365);
   },
 
-  getPreferences: function() {
-    const prefsStr = this.get('userPrefs');
-    if (prefsStr) {
-      try {
-        return JSON.parse(prefsStr);
-      } catch (e) {
-        console.warn('Failed to parse preferences from cookie:', e);
-      }
+  getPreferences() {
+    const prefs = this.get('userPrefs');
+    try {
+      return prefs ? JSON.parse(prefs) : {};
+    } catch (e) {
+      console.warn('❗ Failed to parse userPrefs:', e);
+      return {};
     }
-    return {};
   }
 };
+
+window.CookieManager = CookieManager;
