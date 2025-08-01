@@ -1357,12 +1357,15 @@
       body: formData
     });
 
-    const text = await res.text(); // 👈 打印原始响应
+    const text = await res.text(); // 打印原始响应
     console.log('Cloudinary response text:', text);
 
     try {
       const data = JSON.parse(text);
+      const imageUrl = data.secure_url;
+      console.log('Photo saved to index', index, ':', imageUrl);
       return data.secure_url;
+
     } catch (e) {
       throw new Error(`Invalid JSON from Cloudinary: ${text}`);
     }
