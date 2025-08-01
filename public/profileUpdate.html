@@ -613,6 +613,46 @@
       box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
     }
 
+    /* Previous button styling */
+    .prev-button {
+      padding: 1rem 2rem;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #667eea;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prev-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .prev-button:hover::before {
+      left: 100%;
+    }
+
+    .prev-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: #667eea;
+      background: rgba(102, 126, 234, 0.05);
+    }
+
     /* Enhanced loading states */
     .loading-spinner {
       width: 20px;
@@ -710,6 +750,11 @@
         padding: 0.875rem 2rem;
         font-size: 1rem;
       }
+
+      .prev-button {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+      }
     }
 
     /* Special effects */
@@ -801,10 +846,19 @@
 
   <!-- Bottom Actions -->
   <div class="bottom-actions">
-    <button class="update-button" id="updateBtn" onclick="updateProfile()">
-      <span id="updateBtnText">Update Profile</span>
-      <span>💾</span>
-    </button>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <!-- Previous Button -->
+      <button class="prev-button" id="prevBtn" onclick="prevStep()" style="display: none;">
+        <span>←</span>
+        <span>Previous</span>
+      </button>
+
+      <!-- Next/Update Button -->
+      <button class="update-button" id="updateBtn" onclick="handleMainAction()">
+        <span id="updateBtnText">Next Step</span>
+        <span id="updateBtnIcon">→</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -908,6 +962,29 @@
     document.getElementById('stepIcon').textContent = stepData[currentStep].icon;
     document.getElementById('stepTitle').textContent = stepData[currentStep].title;
     document.getElementById('stepSubtitle').textContent = stepData[currentStep].subtitle;
+
+    // Update button text and visibility
+    const updateBtn = document.getElementById('updateBtn');
+    const updateBtnText = document.getElementById('updateBtnText');
+    const updateBtnIcon = document.getElementById('updateBtnIcon');
+    const prevBtn = document.getElementById('prevBtn');
+
+    if (currentStep === totalSteps - 1) {
+      // Last step - show "Update Profile"
+      updateBtnText.textContent = 'Update Profile';
+      updateBtnIcon.textContent = '💾';
+    } else {
+      // Other steps - show "Next Step"
+      updateBtnText.textContent = 'Next Step';
+      updateBtnIcon.textContent = '→';
+    }
+
+    // Show/hide previous button
+    if (currentStep > 0) {
+      prevBtn.style.display = 'flex';
+    } else {
+      prevBtn.style.display = 'none';
+    }
 
     // Animate card
     const card = document.getElementById('questionCard');
@@ -1355,6 +1432,17 @@
     updateButtonState();
   }
 
+  // Main action handler (Next or Update)
+  function handleMainAction() {
+    if (currentStep === totalSteps - 1) {
+      // Last step - update profile
+      updateProfile();
+    } else {
+      // Other steps - go to next step
+      nextStep();
+    }
+  }
+
   // Navigation
   function nextStep() {
     if (currentStep < totalSteps - 1) {
@@ -1489,7 +1577,19 @@
   // Validation and button state
   function canProceed() {
     const answers = profileData.questionnaire_answers || {};
-    return answers.name && answers.name.trim().length > 0;
+
+    switch (currentStep) {
+      case 0: // Photos step - no requirement, can proceed
+        return true;
+      case 1: // Basic info - name required
+        return answers.name && answers.name.trim().length > 0;
+      case 2: // Preferences - no requirement, can proceed
+        return true;
+      case 3: // Personality - aboutMe required for final submission
+        return answers.aboutMe && answers.aboutMe.trim().length >= 10;
+      default:
+        return true;
+    }
   }
 
   function updateButtonState() {
