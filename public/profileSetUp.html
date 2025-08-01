@@ -1245,7 +1245,7 @@
       if (file) {
         try {
           showNotification('Uploading photo...', 'info'); // 提示上传中
-          await uploadToCloudinaryWeb(file, index);       // ⬅️ 上传
+          answers.photos[index] = await uploadToCloudinaryWeb(file, index);// ⬅️ 上传
           renderCurrentStep();                             // 更新 UI
           updateNextButtonState();                         // 更新按钮状态
           showNotification('Photo uploaded successfully!', 'success');
