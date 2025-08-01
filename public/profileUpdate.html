@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Profile - Find Your Perfect Match</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    .background-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Enhanced glassmorphism container */
+    .questionnaire-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Premium header with floating effect */
+    .header {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(30px);
+      background: rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .back-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-content {
+      text-align: center;
+      color: white;
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .right-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .home-button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+    }
+
+    .home-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Advanced progress bar with glow effect */
+    .progress-container {
+      padding: 0 2rem 2rem;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #fff, #f0f4ff);
+      border-radius: 4px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Premium question card with 3D effects */
+    .main-content {
+      flex: 1;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-bottom: 8rem;
+    }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 3rem;
+      max-width: 800px;
+      width: 100%;
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      animation: cardFloat 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    @keyframes cardFloat {
+      from {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Floating icon with rotation */
+    .question-icon-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .question-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+      box-shadow:
+        0 20px 40px rgba(102, 126, 234, 0.3),
+        0 0 0 10px rgba(255, 255, 255, 0.1);
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .question-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1f2937;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #1f2937, #4f46e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .question-subtitle {
+      font-size: 1.1rem;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* Enhanced form styles */
+    .step-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1f2937;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .required-star {
+      color: #ef4444;
+      font-size: 1.2rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Premium input styling */
+    .input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 15px;
+      font-size: 1rem;
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      color: #1f2937;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: #667eea;
+      font-size: 1.2rem;
+    }
+
+    .textarea-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 15px;
+      font-size: 1rem;
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      color: #1f2937;
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .textarea-input:focus {
+      outline: none;
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Enhanced option buttons with hover effects */
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option-button {
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 15px;
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #6b7280;
+      font-weight: 500;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .option-button:hover::before {
+      left: 100%;
+    }
+
+    .option-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      border-color: #c4b5fd;
+    }
+
+    .option-button.selected {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-color: #f59e0b;
+      color: #92400e;
+      font-weight: 600;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+    }
+
+    /* Photo grid with advanced styling */
+    .photo-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .main-photo-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .photo-card {
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid #e5e7eb;
+    }
+
+    .main-photo-card {
+      width: 200px;
+      height: 200px;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 2px dashed #d1d5db;
+      border-radius: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .photo-placeholder:hover {
+      border-color: #667eea;
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.05);
+    }
+
+    .photo-placeholder-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.6;
+    }
+
+    .uploaded-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-photo-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .remove-photo-btn:hover {
+      background: rgba(239, 68, 68, 0.9);
+      transform: scale(1.1);
+    }
+
+    .main-photo-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: #667eea;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Premium bottom action bar */
+    .bottom-actions {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(30px);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: center;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .update-button {
+      padding: 1rem 3rem;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .update-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .update-button:hover::before {
+      left: 100%;
+    }
+
+    .update-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .update-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .update-button:disabled:hover {
+      transform: none;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Enhanced loading states */
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .loading-content {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Section dividers */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+      margin: 2rem 0;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem;
+      }
+
+      .question-card {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+      }
+
+      .question-title {
+        font-size: 1.5rem;
+      }
+
+      .photo-card {
+        width: 120px;
+        height: 120px;
+      }
+
+      .main-photo-card {
+        width: 160px;
+        height: 160px;
+      }
+
+      .photo-row {
+        gap: 0.5rem;
+      }
+
+      .bottom-actions {
+        padding: 1rem;
+      }
+
+      .update-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* Special effects */
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .pulse {
+      animation: pulse 0.3s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    /* Character counter */
+    .character-counter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .valid-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #10b981;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<div class="background-particles" id="particles"></div>
+
+<div class="questionnaire-container">
+  <!-- Header -->
+  <div class="header" id="header">
+    <button class="back-button" onclick="goBack()" id="backBtn">
+      ←
+    </button>
+
+    <div class="header-content">
+      <div class="header-title">Update Your Profile</div>
+      <div class="header-subtitle">Keep your profile up to date</div>
+    </div>
+
+    <div class="right-buttons">
+      <button class="home-button" onclick="goHome()">🏠 Home</button>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="question-card" id="questionCard">
+      <div class="question-icon-container">
+        <div class="question-icon" id="stepIcon">✏️</div>
+      </div>
+
+      <h2 class="question-title" id="stepTitle">Update Your Profile</h2>
+      <p class="question-subtitle" id="stepSubtitle">Make changes to keep your profile fresh and accurate</p>
+
+      <div class="step-container" id="stepContainer">
+        <!-- Content will be loaded here -->
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <p>Loading your profile...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div class="bottom-actions">
+    <button class="update-button" id="updateBtn" onclick="updateProfile()">
+      <span id="updateBtnText">Update Profile</span>
+      <span>💾</span>
+    </button>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay" style="display: none;">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <p>Updating your profile...</p>
+  </div>
+</div>
+
+<script src="./cookieManager.js"></script>
+<script>
+  // Global state
+  let currentStep = 0;
+  let profileData = {};
+  let isSubmitting = false;
+  let cloudinaryConfig = null;
+
+  const totalSteps = 4;
+  const stepData = [
+    {
+      icon: '📷',
+      title: 'Update Photos',
+      subtitle: 'Add or change your photos'
+    },
+    {
+      icon: '👤',
+      title: 'Basic Information',
+      subtitle: 'Update your basic details'
+    },
+    {
+      icon: '💕',
+      title: 'Dating Preferences',
+      subtitle: 'Modify your preferences'
+    },
+    {
+      icon: '⭐',
+      title: 'About Yourself',
+      subtitle: 'Update your personality and interests'
+    }
+  ];
+
+  // Initialize app
+  document.addEventListener('DOMContentLoaded', function() {
+    createParticles();
+    loadProfile();
+  });
+
+  // Create floating particles
+  function createParticles() {
+    const container = document.getElementById('particles');
+    const particleCount = window.innerWidth > 768 ? 50 : 25;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 6 + 's';
+      particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      container.appendChild(particle);
+    }
+  }
+
+  // Load existing profile data
+  async function loadProfile() {
+    try {
+      const { userInfo } = CookieManager.getAuth();
+      const auth = CookieManager.getAuth();
+      const token = auth?.token;
+
+      if (!userInfo?.id) {
+        showNotification('User not logged in', 'error');
+        return;
+      }
+
+      const response = await fetch(`https://ccbackendx-2.onrender.com/personality/get-profile/${userInfo.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        profileData = await response.json();
+        console.log('Loaded profile:', profileData);
+        updateUI();
+        renderCurrentStep();
+      } else {
+        throw new Error('Failed to load profile');
+      }
+    } catch (err) {
+      console.error('Error loading profile:', err);
+      showNotification('Failed to load profile data', 'error');
+    }
+  }
+
+  // Update UI elements
+  function updateUI() {
+    const progress = ((currentStep + 1) / totalSteps) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('stepIcon').textContent = stepData[currentStep].icon;
+    document.getElementById('stepTitle').textContent = stepData[currentStep].title;
+    document.getElementById('stepSubtitle').textContent = stepData[currentStep].subtitle;
+
+    // Animate card
+    const card = document.getElementById('questionCard');
+    card.style.animation = 'none';
+    card.offsetHeight; // Trigger reflow
+    card.style.animation = 'cardFloat 0.8s ease-out';
+  }
+
+  // Render current step content
+  function renderCurrentStep() {
+    const container = document.getElementById('stepContainer');
+
+    switch (currentStep) {
+      case 0:
+        container.innerHTML = renderPhotosStep();
+        break;
+      case 1:
+        container.innerHTML = renderBasicInfoStep();
+        break;
+      case 2:
+        container.innerHTML = renderPreferencesStep();
+        break;
+      case 3:
+        container.innerHTML = renderPersonalityStep();
+        break;
+    }
+
+    // Add event listeners after rendering
+    addEventListeners();
+    updateButtonState();
+  }
+
+  // Photos step
+  function renderPhotosStep() {
+    const photos = profileData.photo_urls || [null, null, null, null, null];
+    const uploadedCount = photos.filter(p => p).length;
+
+    return `
+      <div class="input-group">
+        <div class="section-title">📷 Your Photos</div>
+        <p class="subtitle">You have ${uploadedCount} photos. You can add more or replace existing ones.</p>
+
+        <div class="photo-grid">
+          <div class="main-photo-row">
+            ${renderPhotoCard(0, true, photos[0])}
+          </div>
+          <div class="photo-row">
+            ${renderPhotoCard(1, false, photos[1])}
+            ${renderPhotoCard(2, false, photos[2])}
+          </div>
+          <div class="photo-row">
+            ${renderPhotoCard(3, false, photos[3])}
+            ${renderPhotoCard(4, false, photos[4])}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderPhotoCard(index, isMain = false, photoUrl = null) {
+    const cardClass = isMain ? 'photo-card main-photo-card' : 'photo-card';
+
+    if (photoUrl) {
+      return `
+        <div class="${cardClass}" onclick="pickImage(${index})">
+          <img src="${photoUrl}" alt="Photo ${index + 1}" class="uploaded-photo">
+          <button class="remove-photo-btn" onclick="removePhoto(${index}); event.stopPropagation()">×</button>
+          ${isMain ? '<div class="main-photo-label">Main</div>' : ''}
+        </div>
+      `;
+    } else {
+      return `
+        <div class="${cardClass}" onclick="pickImage(${index})">
+          <div class="photo-placeholder">
+            <div class="photo-placeholder-icon">📷</div>
+            <div>${isMain ? 'Main Photo' : `Photo ${index + 1}`}</div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Basic info step
+  function renderBasicInfoStep() {
+    const answers = profileData.questionnaire_answers || {};
+
+    return `
+      <div class="section-title">👤 Basic Information</div>
+
+      <div class="input-group">
+        <label class="label">
+          What's your name? <span class="required-star">*</span>
+        </label>
+        <div class="input-container">
+          <span class="input-icon">👤</span>
+          <input type="text" class="text-input" placeholder="Your name"
+                 value="${answers.name || profileData.name || ''}" onchange="updateAnswer('name', this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your phone number?</label>
+        <p class="subtitle">Phone number is needed to receive important updates. It will ONLY be shared with your confirmed date.</p>
+        <div class="input-container">
+          <span class="input-icon">📱</span>
+          <input type="tel" class="text-input" placeholder="Phone number"
+                 value="${answers.phone || ''}" onchange="updateAnswer('phone', this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">How old are you?</label>
+        <div class="input-container">
+          <span class="input-icon">📅</span>
+          <input type="number" class="text-input" placeholder="Age" min="18" max="99"
+                 value="${answers.age || profileData.age || ''}" onchange="updateAnswer('age', this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">How tall are you?</label>
+        <p class="subtitle">e.g.: 180cm</p>
+        <div class="input-container">
+          <span class="input-icon">📏</span>
+          <input type="text" class="text-input" placeholder="Height in cm"
+                 value="${answers.height || profileData.height || ''}" onchange="updateAnswer('height', this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your gender?</label>
+        <div class="options-container">
+          ${renderOptions(['Female', 'Male', 'Nonbinary'], 'gender', answers.gender || profileData.gender)}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your sexuality?</label>
+        <div class="options-container">
+          ${renderOptions(['Straight', 'Gay', 'Lesbian', 'Bisexual', 'Pansexual', 'Asexual', 'Other', 'Prefer not to say'], 'sexuality', answers.sexuality || profileData.orientation)}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your ethnicity?</label>
+        <p class="subtitle">Select all that apply</p>
+        <div class="options-container">
+          ${renderMultiOptions(['American Indian', 'Black/African Descent', 'East Asian', 'Hispanic/Latino', 'Middle Eastern', 'Pacific Islander', 'South Asian', 'White/Caucasian', 'Other', 'Prefer not to say'], 'ethnicity', answers.ethnicity)}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What's your zip code?</label>
+        <div class="input-container">
+          <span class="input-icon">📍</span>
+          <input type="text" class="text-input" placeholder="94704"
+                 value="${answers.zipCode || ''}" onchange="updateAnswer('zipCode', this.value)">
+        </div>
+      </div>
+    `;
+  }
+
+  // Preferences step
+  function renderPreferencesStep() {
+    const answers = profileData.questionnaire_answers || {};
+
+    return `
+      <div class="section-title">💕 Dating Preferences</div>
+
+      <div class="input-group">
+        <label class="label">What is your dating intention?</label>
+        <p class="subtitle">Select all that apply</p>
+        <div class="options-container">
+          ${renderMultiOptions(['Life partner', 'Long-term relationship', 'Short-term relationship', 'Making new friends', 'Prefer not to say'], 'datingIntentions', answers.datingIntentions)}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">Who do you want to date?</label>
+        <p class="subtitle">Select all who you're open to meeting</p>
+        <div class="options-container">
+          ${renderMultiOptions(['Men', 'Women', 'Nonbinary people', 'Everyone'], 'interestedIn', answers.interestedIn)}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What age range would you like to date?</label>
+        <p class="subtitle">Current range: ${answers.ageRange ? answers.ageRange[0] + '-' + answers.ageRange[1] : '18-30'}</p>
+        <div style="display: flex; gap: 1rem; align-items: center; justify-content: center;">
+          <input type="number" class="text-input" placeholder="Min" min="18" max="99"
+                 style="width: 80px; text-align: center;"
+                 value="${answers.ageRange ? answers.ageRange[0] : 18}"
+                 onchange="updateAgeRange(0, this.value)">
+          <span style="font-weight: 600; color: #6b7280;">to</span>
+          <input type="number" class="text-input" placeholder="Max" min="18" max="99"
+                 style="width: 80px; text-align: center;"
+                 value="${answers.ageRange ? answers.ageRange[1] : 30}"
+                 onchange="updateAgeRange(1, this.value)">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">When dating, what are green flags for you?</label>
+        <textarea class="textarea-input" placeholder="She is nice. She likes animals. She is extroverted..."
+                  onchange="updateAnswer('greenFlags', this.value)">${answers.greenFlags || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">When dating, what are red flags for you?</label>
+        <textarea class="textarea-input" placeholder="She is very rude and doesn't care..."
+                  onchange="updateAnswer('redFlags', this.value)">${answers.redFlags || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What do you find physically attractive?</label>
+        <textarea class="textarea-input" placeholder="She is tall and fit. She has big eyes..."
+                  onchange="updateAnswer('physicalAttraction', this.value)">${answers.physicalAttraction || ''}</textarea>
+      </div>
+    `;
+  }
+
+  // Personality step
+  function renderPersonalityStep() {
+    const answers = profileData.questionnaire_answers || {};
+
+    return `
+      <div class="section-title">⭐ About Yourself</div>
+
+      <div class="input-group">
+        <label class="label">
+          Tell us about yourself <span class="required-star">*</span>
+        </label>
+        <p class="subtitle">What makes you unique? Share your personality and what drives you</p>
+        <textarea class="textarea-input" placeholder="I'm someone who loves..." maxlength="500"
+                  onchange="updateAnswer('aboutMe', this.value)" oninput="updateCharacterCount('aboutMe', this.value)">${answers.aboutMe || ''}</textarea>
+        <div class="character-counter">
+          <span>${(answers.aboutMe || '').length}/500 characters</span>
+          ${(answers.aboutMe || '').length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What are your interests and hobbies?</label>
+        <p class="subtitle">What do you love doing in your free time?</p>
+        <textarea class="textarea-input" placeholder="I'm passionate about..." maxlength="500"
+                  onchange="updateAnswer('hobbies', this.value)">${answers.hobbies || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">Describe your lifestyle</label>
+        <p class="subtitle">Are you more of a homebody or always exploring?</p>
+        <textarea class="textarea-input" placeholder="My typical day involves..." maxlength="500"
+                  onchange="updateAnswer('lifestyle', this.value)">${answers.lifestyle || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What values are most important to you?</label>
+        <p class="subtitle">What principles guide your life and decisions?</p>
+        <textarea class="textarea-input" placeholder="The values that matter most to me are..." maxlength="500"
+                  onchange="updateAnswer('values', this.value)">${answers.values || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">What are your dreams for the future?</label>
+        <p class="subtitle">Where do you see yourself in 5 years?</p>
+        <textarea class="textarea-input" placeholder="In the future, I hope to..." maxlength="500"
+                  onchange="updateAnswer('futureGoals', this.value)">${answers.futureGoals || ''}</textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="label">Describe your perfect date</label>
+        <p class="subtitle">What would make for an amazing time together?</p>
+        <textarea class="textarea-input" placeholder="My ideal date would be..." maxlength="500"
+                  onchange="updateAnswer('perfectDate', this.value)">${answers.perfectDate || ''}</textarea>
+      </div>
+    `;
+  }
+
+  // Helper functions for rendering options
+  function renderOptions(options, key, currentValue) {
+    return options.map(option => `
+      <div class="option-button ${currentValue === option ? 'selected' : ''}"
+           onclick="selectOption('${key}', '${option}')">
+        ${option}
+      </div>
+    `).join('');
+  }
+
+  function renderMultiOptions(options, key, currentValues = []) {
+    return options.map(option => `
+      <div class="option-button ${currentValues.includes(option) ? 'selected' : ''}"
+           onclick="toggleOption('${key}', '${option}')">
+        ${option}
+      </div>
+    `).join('');
+  }
+
+  // Event handlers
+  function addEventListeners() {
+    // Add any specific event listeners here if needed
+  }
+
+  function updateAnswer(key, value) {
+    if (!profileData.questionnaire_answers) {
+      profileData.questionnaire_answers = {};
+    }
+    profileData.questionnaire_answers[key] = value;
+    updateButtonState();
+  }
+
+  function updateCharacterCount(key, value) {
+    updateAnswer(key, value);
+    const counter = document.querySelector('.character-counter');
+    if (counter) {
+      counter.innerHTML = `
+        <span>${value.length}/500 characters</span>
+        ${value.length >= 10 ? '<div class="valid-indicator"><span class="tip-icon">✓</span> Looking good!</div>' : ''}
+      `;
+    }
+  }
+
+  function selectOption(key, value) {
+    updateAnswer(key, value);
+    renderCurrentStep();
+    updateButtonState();
+
+    // Add pulse effect
+    const selectedElement = document.querySelector(`[onclick="selectOption('${key}', '${value}')"]`);
+    if (selectedElement) {
+      selectedElement.classList.add('pulse');
+      setTimeout(() => selectedElement.classList.remove('pulse'), 300);
+    }
+  }
+
+  function toggleOption(key, value) {
+    if (!profileData.questionnaire_answers) {
+      profileData.questionnaire_answers = {};
+    }
+    if (!profileData.questionnaire_answers[key]) {
+      profileData.questionnaire_answers[key] = [];
+    }
+
+    const index = profileData.questionnaire_answers[key].indexOf(value);
+    if (index > -1) {
+      profileData.questionnaire_answers[key].splice(index, 1);
+    } else {
+      profileData.questionnaire_answers[key].push(value);
+    }
+
+    renderCurrentStep();
+    updateButtonState();
+  }
+
+  function updateAgeRange(index, value) {
+    if (!profileData.questionnaire_answers) {
+      profileData.questionnaire_answers = {};
+    }
+    if (!profileData.questionnaire_answers.ageRange) {
+      profileData.questionnaire_answers.ageRange = [18, 30];
+    }
+
+    profileData.questionnaire_answers.ageRange[index] = parseInt(value) || (index === 0 ? 18 : 30);
+
+    // Validate range
+    if (profileData.questionnaire_answers.ageRange[0] > profileData.questionnaire_answers.ageRange[1]) {
+      showNotification('Minimum age cannot be greater than maximum age', 'error');
+      return;
+    }
+
+    updateButtonState();
+  }
+
+  // Photo handling
+  async function fetchCloudinaryConfig() {
+    try {
+      const res = await fetch('https://ccbackendx-2.onrender.com/personality/cloudinary');
+      cloudinaryConfig = await res.json();
+      console.log('Cloudinary config loaded');
+    } catch (err) {
+      console.error('Failed to fetch cloudinary config', err);
+    }
+  }
+
+  function pickImage(index) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    input.onchange = async function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        try {
+          showNotification('Uploading photo...', 'info');
+          const photoUrl = await uploadToCloudinaryWeb(file, index);
+
+          if (!profileData.photo_urls) {
+            profileData.photo_urls = [null, null, null, null, null];
+          }
+          profileData.photo_urls[index] = photoUrl;
+
+          renderCurrentStep();
+          updateButtonState();
+          showNotification('Photo uploaded successfully!', 'success');
+        } catch (err) {
+          console.error('Upload failed:', err);
+          showNotification('Photo upload failed. Please try again.', 'error');
+        }
+      }
+    };
+
+    input.click();
+  }
+
+  async function uploadToCloudinaryWeb(file, index) {
+    if (!cloudinaryConfig) await fetchCloudinaryConfig();
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', cloudinaryConfig.uploadPreset);
+
+    const res = await fetch(cloudinaryConfig.uploadUrl, {
+      method: 'POST',
+      body: formData
+    });
+
+    const text = await res.text();
+    console.log('Cloudinary response text:', text);
+
+    try {
+      const data = JSON.parse(text);
+      const imageUrl = data.secure_url;
+      console.log('Photo saved to index', index, ':', imageUrl);
+      return imageUrl;
+    } catch (e) {
+      throw new Error(`Invalid JSON from Cloudinary: ${text}`);
+    }
+  }
+
+  function removePhoto(index) {
+    if (!profileData.photo_urls) {
+      profileData.photo_urls = [null, null, null, null, null];
+    }
+    profileData.photo_urls[index] = null;
+    renderCurrentStep();
+    updateButtonState();
+  }
+
+  // Navigation
+  function nextStep() {
+    if (currentStep < totalSteps - 1) {
+      currentStep++;
+      updateUI();
+      renderCurrentStep();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      updateUI();
+      renderCurrentStep();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function goBack() {
+    if (currentStep > 0) {
+      prevStep();
+    } else {
+      if (confirm('Are you sure you want to leave? Your changes will be lost.')) {
+        window.history.back();
+      }
+    }
+  }
+
+  function goHome() {
+    if (confirm('Are you sure you want to go home? Your changes will be lost.')) {
+      window.location.href = '/index.html';
+    }
+  }
+
+  // Update profile
+  async function updateProfile() {
+    if (isSubmitting) return;
+
+    isSubmitting = true;
+    document.getElementById('loadingOverlay').style.display = 'flex';
+
+    try {
+      const { userInfo } = CookieManager.getAuth();
+      const auth = CookieManager.getAuth();
+      const token = auth?.token;
+
+      if (!userInfo?.id) {
+        throw new Error('User not logged in');
+      }
+
+      const answers = profileData.questionnaire_answers || {};
+
+      // Prepare basic profile data
+      const basicProfileData = {
+        user_id: userInfo.id,
+        name: answers.name || profileData.name || '',
+        height: answers.height || profileData.height || null,
+        age: answers.age || profileData.age || null,
+        gender: answers.gender || profileData.gender || null,
+        orientation: answers.sexuality || profileData.orientation || null,
+        photo_urls: (profileData.photo_urls || []).filter(p => p)
+      };
+
+      // Update basic profile
+      const basicResponse = await fetch('https://ccbackendx-2.onrender.com/personality/update-profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(basicProfileData)
+      });
+
+      if (!basicResponse.ok) {
+        throw new Error('Failed to update basic profile');
+      }
+
+      // Update matching profile
+      const matchingProfileData = {
+        user_id: userInfo.id,
+        questionnaire_answers: {
+          ...answers,
+          phone: answers.phone || '',
+          birthday: answers.birthday || '',
+          ethnicity: answers.ethnicity || [],
+          extroversion: answers.extroversion || 5,
+          zipCode: answers.zipCode || '',
+          selectedAreas: answers.selectedAreas || [],
+          datingIntentions: answers.datingIntentions || [],
+          interestedIn: answers.interestedIn || [],
+          ethnicityAttraction: answers.ethnicityAttraction || [],
+          ageRange: answers.ageRange || [18, 30],
+          greenFlags: answers.greenFlags || '',
+          redFlags: answers.redFlags || '',
+          physicalAttraction: answers.physicalAttraction || '',
+          hobbies: answers.hobbies || '',
+          lifestyle: answers.lifestyle || '',
+          values: answers.values || '',
+          futureGoals: answers.futureGoals || '',
+          perfectDate: answers.perfectDate || ''
+        }
+      };
+
+      const matchingResponse = await fetch('https://ccbackendx-2.onrender.com/personality/update-matching-profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(matchingProfileData)
+      });
+
+      if (matchingResponse.ok) {
+        showNotification('🎉 Profile updated successfully!', 'success');
+        setTimeout(() => {
+          window.location.href = '/home.html';
+        }, 2000);
+      } else {
+        throw new Error('Failed to update matching profile');
+      }
+
+    } catch (err) {
+      console.error('Update error:', err);
+      showNotification('Error updating profile. Please try again.', 'error');
+    } finally {
+      isSubmitting = false;
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+  }
+
+  // Validation and button state
+  function canProceed() {
+    const answers = profileData.questionnaire_answers || {};
+    return answers.name && answers.name.trim().length > 0;
+  }
+
+  function updateButtonState() {
+    const updateBtn = document.getElementById('updateBtn');
+    if (canProceed()) {
+      updateBtn.disabled = false;
+      updateBtn.style.opacity = '1';
+    } else {
+      updateBtn.disabled = true;
+      updateBtn.style.opacity = '0.5';
+    }
+  }
+
+  // Navigation between steps
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft' && currentStep > 0) {
+      prevStep();
+    } else if (e.key === 'ArrowRight' && currentStep < totalSteps - 1) {
+      nextStep();
+    }
+  });
+
+  // Add step navigation
+  function addStepNavigation() {
+    const stepNav = document.createElement('div');
+    stepNav.style.cssText = `
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 50;
+    `;
+
+    for (let i = 0; i < totalSteps; i++) {
+      const stepDot = document.createElement('div');
+      stepDot.style.cssText = `
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: ${i === currentStep ? '#667eea' : 'rgba(255,255,255,0.3)'};
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid ${i === currentStep ? '#667eea' : 'rgba(255,255,255,0.5)'};
+      `;
+      stepDot.onclick = () => {
+        currentStep = i;
+        updateUI();
+        renderCurrentStep();
+      };
+      stepNav.appendChild(stepDot);
+    }
+
+    document.body.appendChild(stepNav);
+  }
+
+  // Notification system
+  function showNotification(message, type = 'info') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+      type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+        'linear-gradient(135deg, #667eea, #764ba2)'};
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transform: translateX(400px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 300px;
+      backdrop-filter: blur(20px);
+    `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    setTimeout(() => {
+      notification.style.transform = 'translateX(400px)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    }, 4000);
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    const container = document.getElementById('particles');
+    container.innerHTML = '';
+    createParticles();
+  });
+
+  // Add step navigation on load
+  setTimeout(addStepNavigation, 1000);
+
+</script>
+</body>
+</html>
