@@ -1229,6 +1229,8 @@
     try {
       const res = await fetch('https://ccbackendx-2.onrender.com/personality/cloudinary');
       cloudinaryConfig = await res.json();
+      console.log('Cloudinary', cloudinaryConfig.uploadPreset);
+      console.log('Cloudinary', cloudinaryConfig.uploadUrl);
     } catch (err) {
       console.error('Failed to fetch cloudinary config', err);
     }
