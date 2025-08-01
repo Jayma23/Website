@@ -1352,9 +1352,17 @@
       body: formData
     });
 
-    const data = await res.json();
-    return data.secure_url;
+    const text = await res.text(); // 👈 打印原始响应
+    console.log('Cloudinary response text:', text);
+
+    try {
+      const data = JSON.parse(text);
+      return data.secure_url;
+    } catch (e) {
+      throw new Error(`Invalid JSON from Cloudinary: ${text}`);
+    }
   }
+
 
 
   function removePhoto(index) {
