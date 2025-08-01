@@ -1223,6 +1223,16 @@
   }
 
   // Photo handling
+  let cloudinaryConfig = null;
+
+  async function fetchCloudinaryConfig() {
+    try {
+      const res = await fetch('https://ccbackendx-2.onrender.com/personality/cloudinary');
+      cloudinaryConfig = await res.json();
+    } catch (err) {
+      console.error('Failed to fetch cloudinary config', err);
+    }
+  }
   function pickImage(index) {
     const input = document.createElement('input');
     input.type = 'file';
@@ -1331,37 +1341,19 @@
   }
 
   async function uploadToCloudinaryWeb(file, index) {
+    if (!cloudinaryConfig) await fetchCloudinaryConfig();
+
     const formData = new FormData();
-    const CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
-    const CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
-
-
     formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET); // 你的 unsigned preset
-    // 可选：指定 Cloudinary folder
-    // formData.append('folder', 'my_photos');
+    formData.append('upload_preset', cloudinaryConfig.uploadPreset);
 
-    try {
-      const res = await fetch(CLOUDINARY_UPLOAD_URL, {
-        method: 'POST',
-        body: formData
-      });
+    const res = await fetch(cloudinaryConfig.uploadUrl, {
+      method: 'POST',
+      body: formData
+    });
 
-      const data = await res.json();
-
-      if (data.secure_url) {
-        // 更新 photos 数组
-        answers.photos[index] = data.secure_url;
-        renderCurrentStep();
-        updateNextButtonState();
-        showNotification('Photo uploaded successfully!', 'success');
-      } else {
-        showNotification('Upload failed. Please try again.', 'error');
-      }
-    } catch (err) {
-      console.error('Upload error:', err);
-      showNotification('Network error. Please check your connection.', 'error');
-    }
+    const data = await res.json();
+    return data.secure_url;
   }
 
 
