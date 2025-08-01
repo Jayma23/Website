@@ -1342,6 +1342,9 @@
 
   async function uploadToCloudinaryWeb(file, index) {
     if (!cloudinaryConfig) await fetchCloudinaryConfig();
+    console.log('Cloudinary', cloudinaryConfig.uploadPreset);
+    console.log('Cloudinary', cloudinaryConfig.uploadUrl);
+
 
     const formData = new FormData();
     formData.append('file', file);
