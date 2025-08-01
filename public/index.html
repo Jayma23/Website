@@ -865,6 +865,72 @@
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+<script>
+  VanillaTilt.init(document.querySelectorAll(".feature-card"), {
+    max: 25,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.5,
+  });
+</script>
+<canvas id="starfield" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;"></canvas>
+<script>
+  const canvas = document.getElementById("starfield");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let stars = [];
+  for (let i = 0; i < 300; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2,
+      d: Math.random() * 0.5
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      ctx.moveTo(s.x, s.y);
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    }
+    ctx.fill();
+    moveStars();
+  }
+
+  function moveStars() {
+    for (let i = 0; i < stars.length; i++) {
+      stars[i].y += stars[i].d;
+      if (stars[i].y > canvas.height) {
+        stars[i].y = 0;
+        stars[i].x = Math.random() * canvas.width;
+      }
+    }
+  }
+
+  setInterval(drawStars, 50);
+</script>
+
+<!-- 🔥 Inserted section: Keyboard-triggered easter egg (Konami Code) -->
+<script>
+  let konami = [];
+  const code = [38,38,40,40,37,39,37,39,66,65];
+  window.addEventListener('keydown', function(e) {
+    konami.push(e.keyCode);
+    if (konami.toString().indexOf(code.toString()) >= 0) {
+      showToast('👾 Secret mode activated!', 'success');
+      document.body.style.filter = 'hue-rotate(270deg)';
+      setTimeout(() => document.body.style.filter = '', 5000);
+      konami = [];
+    }
+  });
+</script>
 
 <script>
   // Cookie management utilities
