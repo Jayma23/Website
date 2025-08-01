@@ -1227,22 +1227,26 @@
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.onchange = function(event) {
+
+    input.onchange = async function(event) {
       const file = event.target.files[0];
       if (file) {
-        // For demo purposes, create a local URL
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          answers.photos[index] = e.target.result;
-          renderCurrentStep();
-          updateNextButtonState();
+        try {
+          showNotification('Uploading photo...', 'info'); // 提示上传中
+          await uploadToCloudinaryWeb(file, index);       // ⬅️ 上传
+          renderCurrentStep();                             // 更新 UI
+          updateNextButtonState();                         // 更新按钮状态
           showNotification('Photo uploaded successfully!', 'success');
-        };
-        reader.readAsDataURL(file);
+        } catch (err) {
+          console.error('Upload failed:', err);
+          showNotification('Photo upload failed. Please try again.', 'error');
+        }
       }
     };
+
     input.click();
   }
+  console.log('🚀 准备提交的照片:', answers.photos);
   async function submitAnswers() {
     const { userInfo } = CookieManager.getAuth();
     const auth = CookieManager.getAuth();
